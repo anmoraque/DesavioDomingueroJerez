@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<!-- salir -->
+<!--saludar-->
+    <item android:title="MENU">
+        <menu>
+            <item android:title="Buscador por mapa"
+                app:showAsAction="always"
+                android:orderInCategory="0"
+                />
+            <item android:title="Buscador por distritos"
+                app:showAsAction="always"
+                android:orderInCategory="1"
+                />
+            <item android:title="Adjuntar negocio nuevo"
+                app:showAsAction="always"
+                android:orderInCategory="2"
+                />
+            <item android:title="Ayuda sobre la App"
+                app:showAsAction="always"
+                android:orderInCategory="3"
+                />
+            <item android:title="Creditos"
+                app:showAsAction="always"
+                android:orderInCategory="4"
+                />
+        </menu>
+    </item>
+</menu>

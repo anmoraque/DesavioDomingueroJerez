@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="horizontal">
+    <androidx.cardview.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        card_view:cardCornerRadius="6dp"
+        android:layout_margin="4dp">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:src="@drawable/mapa_jerez">
+        </ImageView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:orientation="vertical"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/nombreDistrito"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Distrito Norte"
+                android:textSize="26sp"
+                android:textColor="@color/purple_500"
+                android:gravity="center">
+
+            </TextView>
+            <TextView
+                android:id="@+id/informacionDistrito"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="Plaza del Caballo, Álvaro Domecq, San Joaquín, Torres de Córdoba, El Almendral, Montealto, El Altillo, Las Flores, El Bosque, Parque González Hontoria, Zona Hipercor, Jacaranda.">
+
+            </TextView>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</LinearLayout>
