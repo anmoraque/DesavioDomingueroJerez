@@ -7,23 +7,33 @@
         <menu>
             <item android:title="Buscador por mapa"
                 app:showAsAction="always"
+                android:icon="@drawable/ic_baseline_map_24"
                 android:orderInCategory="0"
                 />
             <item android:title="Buscador por distritos"
                 app:showAsAction="always"
+                android:icon="@drawable/ic_baseline_zoom_in_map_24"
                 android:orderInCategory="1"
                 />
             <item android:title="Adjuntar negocio nuevo"
                 app:showAsAction="always"
+                android:icon="@drawable/ic_baseline_person_add_24"
                 android:orderInCategory="2"
                 />
             <item android:title="Ayuda sobre la App"
                 app:showAsAction="always"
+                android:icon="@drawable/ic_baseline_help_24"
                 android:orderInCategory="3"
+                />
+            <item android:title="Compartir"
+                app:showAsAction="always"
+                android:icon="@drawable/ic_baseline_share_24"
+                android:orderInCategory="4"
                 />
             <item android:title="Creditos"
                 app:showAsAction="always"
-                android:orderInCategory="4"
+                android:icon="@drawable/ic_baseline_account_circle_24"
+                android:orderInCategory="5"
                 />
         </menu>
     </item>

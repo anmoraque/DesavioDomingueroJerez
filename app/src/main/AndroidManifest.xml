@@ -16,29 +16,43 @@
         <activity
             android:name=".PantallaNegociosActivity"
             android:label="Negocios del Distrito"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboard"
             android:exported="false" />
         <activity
             android:name=".PantallaAyudaActivity"
             android:label="Ayuda sobre la App"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboard"
             android:exported="false" />
         <activity
             android:name=".PantallaCreditosActivity"
             android:label="Creditos"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboard"
             android:exported="false" />
         <activity
             android:name=".PantallaDistritosActivity"
             android:label="Distritos de Jerez de la Frontera"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboard"
             android:exported="false" />
         <activity
             android:name=".PantallaMapaUbicacionActivity"
             android:label="Mapa de Jerez de la Frontera"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboard"
             android:exported="false" />
         <activity
             android:name=".AdjuntarNuevoNegocioUsuarioActivity"
             android:exported="false"
-            android:label="Adjuntar nuevo negocio" />
+            android:label="Adjuntar nuevo negocio"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboard"/>
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboard"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

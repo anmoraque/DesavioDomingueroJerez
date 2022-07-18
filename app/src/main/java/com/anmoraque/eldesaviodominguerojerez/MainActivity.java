@@ -2,6 +2,7 @@ package com.anmoraque.eldesaviodominguerojerez;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -18,6 +20,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private boolean menu_visible;
+    private final static String RUTA_TIENDA = "https://play.google.com/store/apps/details?id=com.anmoraque.eldesaviodominguerojerez";
 
     /**
      * Crea la actividad principal
@@ -27,6 +30,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Forzar a no usar el tema night
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //Con esta instrucción personalizo el icono del menú que abre
@@ -99,6 +105,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 saltaActividad(PantallaAyudaActivity.class);
                 break;
             case 4:
+                Intent intent_compartir = new Intent(Intent.ACTION_SEND);
+                String texto_compartir = "Descárgate la APP";
+                texto_compartir = texto_compartir + " " + RUTA_TIENDA;
+                intent_compartir.putExtra(Intent.EXTRA_TEXT, texto_compartir);
+                intent_compartir.setType("text/plain");//tipo de dato que quiero compartir TIPO MIME
+                intent_compartir.setPackage("com.whatsapp");
+
+                if (intent_compartir.resolveActivity(getPackageManager()) != null)
+                {
+                    //tiene whatsapp
+                    startActivity(intent_compartir);
+                }else {
+
+                    intent_compartir.setPackage("org.telegram.messenger");
+                    if (intent_compartir.resolveActivity(getPackageManager()) != null)
+                    {
+                        startActivity(intent_compartir);
+                    } else {
+                        Toast.makeText(this, "Descárgate la APP", Toast.LENGTH_LONG).show();
+                    }
+
+                }
+                break;
+            case 5:
                 saltaActividad(PantallaCreditosActivity.class);
                 break;
         }
