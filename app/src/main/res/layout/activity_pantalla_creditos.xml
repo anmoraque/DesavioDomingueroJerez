@@ -7,14 +7,90 @@
     tools:context=".PantallaCreditosActivity">
 
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Creditos"
-        android:textSize="50sp"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="26sp"
+        android:text="Autor de la APP"
+        android:textSize="24sp"
+        android:textColor="@color/purple_500"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/foto_autor"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/foto_al"
+            app:civ_border_color="@color/teal_200"
+            app:civ_border_width="2dp" />
+
+        <TextView
+            android:id="@+id/nombre_autor"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="5dp"
+            android:text="Alberto Morales"
+            android:textColor="@color/purple_500"
+            android:textSize="24sp"></TextView>
+
+        <ImageView
+            android:id="@+id/logo_linkedin"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="5dp"
+            android:src="@drawable/linkedin"></ImageView>
+
+        <ImageView
+            android:id="@+id/logo_github"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="5dp"
+            android:src="@drawable/logogithub"></ImageView>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/descripcion_creditos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="La aplicación ha sido desarrollada como práctica después de un curso de Android promovido por el Servicio Estatal de Empleo Español. La aplicación no obtiene nigún dato personal del usuario. Esta exenta de cualquier garantía. Para cualquier sugerencia o comentario contacte con el autor"
+        android:textAlignment="center"
+        android:textColor="@color/purple_500"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"></TextView>
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:srcCompat="@drawable/logo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
