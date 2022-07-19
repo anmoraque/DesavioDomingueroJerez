@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
@@ -48,7 +48,7 @@
             android:paddingLeft="5dp"
             android:text="Alberto Morales"
             android:textColor="@color/purple_500"
-            android:textSize="24sp"></TextView>
+            android:textSize="20sp"></TextView>
 
         <ImageView
             android:id="@+id/logo_linkedin"
@@ -73,7 +73,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:text="La aplicación ha sido desarrollada como práctica después de un curso de Android promovido por el Servicio Estatal de Empleo Español. La aplicación no obtiene nigún dato personal del usuario. Esta exenta de cualquier garantía. Para cualquier sugerencia o comentario contacte con el autor"
+        android:text="La aplicación ha sido desarrollada como práctica después de un curso de Android promovido por el Servicio Estatal de Empleo Español. La aplicación no obtiene nigún dato personal del usuario. Esta exenta de cualquier garantía. Para cualquier sugerencia o comentario contacte con el autor. Espero que el trabajo invertido le sea de utilidad, gracias por utilizarla."
         android:textAlignment="center"
         android:textColor="@color/purple_500"
         android:textSize="18sp"
@@ -86,11 +86,54 @@
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="100dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/descripcion_creditos"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:srcCompat="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="Colaboradora en el diseño"
+        android:textColor="@color/purple_500"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/foto_colaboradora"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/foto_pa"
+            app:civ_border_color="@color/teal_200"
+            app:civ_border_width="2dp" />
+
+        <TextView
+            android:id="@+id/nombre_colaboradora"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="5dp"
+            android:text="Patricia Guerrero"
+            android:textColor="@color/purple_500"
+            android:textSize="20sp"></TextView>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
