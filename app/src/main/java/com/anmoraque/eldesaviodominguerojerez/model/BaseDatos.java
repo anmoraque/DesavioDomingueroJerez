@@ -65,4 +65,10 @@ public class BaseDatos extends SQLiteOpenHelper {
 
     ////obtener Distrito del negocio SELECT - leer
 
+    public List<Negocios> obtenerNeogciosDistrito (Distritos distrito)
+    {
+        //SELECT parecida a public List<Coche> obtenerCochesPersona (Persona persona) del ejemplo del curso
+        return null;
+    }
+
 }

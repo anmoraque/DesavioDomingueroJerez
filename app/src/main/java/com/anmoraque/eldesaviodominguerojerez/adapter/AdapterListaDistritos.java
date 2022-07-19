@@ -1,5 +1,7 @@
 package com.anmoraque.eldesaviodominguerojerez.adapter;
 
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import com.anmoraque.eldesaviodominguerojerez.PantallaNegociosActivity;
 import com.anmoraque.eldesaviodominguerojerez.R;
 import com.anmoraque.eldesaviodominguerojerez.model.Distritos;
 
@@ -39,6 +42,19 @@ public class AdapterListaDistritos extends RecyclerView.Adapter<DistritosViewHol
         View fila_distrito = layoutInflater.inflate(R.layout.fila_distritos, parent, false);
         distritosViewHolder = new DistritosViewHolder(fila_distrito);
 
+        //Escucho la linea tocada
+        distritosViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int distrito = (int) v.getTag(); //v es la fila del distrito
+                Log.d("ETIQUETA_LOG", "Distrito tocado número: " + distrito);
+                Intent intent = new Intent(v.getContext(), PantallaNegociosActivity.class);
+                intent.putExtra("distrito", distrito);
+                v.getContext().startActivity(intent);
+
+            }
+        });
+
         return distritosViewHolder;
     }
 
@@ -50,6 +66,7 @@ public class AdapterListaDistritos extends RecyclerView.Adapter<DistritosViewHol
 
         Distritos list_distritos = lista_distritos.get(position);
         holder.cargarDistritosEnViewHolder(list_distritos);
+        holder.itemView.setTag(position);
     }
     /**
      * Va a rellenar el holder hasta el final de la lista

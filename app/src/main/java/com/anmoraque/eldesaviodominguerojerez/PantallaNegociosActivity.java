@@ -31,6 +31,13 @@ public class PantallaNegociosActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        int distrito_seleccionado = getIntent().getIntExtra("distrito", 0) ;
+        //DE FORMA IDEAL, EN LA BASE DE DATOS, DEBERÍAS TENER UN MÉTODO
+        //List<Negocios> obtenerNegociosDeDistrito (distrito_seleccionado)
+        //esto sería parecido al obtenerCochesDePersona del ejemplo que hicimos
+
+
+
         //Creo la lista Negocios
         List<Negocios> lista_negocios = new ArrayList<>();
 
@@ -41,10 +48,24 @@ public class PantallaNegociosActivity extends AppCompatActivity {
         Negocios negocio4 = new Negocios(4, 1, R.drawable.alimentacion, "Alimentación y Bazar", "Tienda típica china con casi de todo.Alimentación, bebidas, droguería, ferretería, papelería, juguetes, lencería, etc.","9:30 – 22:30", "Urbanización, Calle Sevilla, 24", "https://goo.gl/maps/yvTLnoM2NrckKpMe8");
 
 
+
         lista_negocios.add(negocio1);
         lista_negocios.add(negocio2);
         lista_negocios.add(negocio3);
         lista_negocios.add(negocio4);
+
+        List<Negocios> lista_negocios_distrito = new ArrayList<Negocios>();
+        //introducumos en esta lista, sólo los negocios que pertenezcan al distrito seleccionado
+        for (Negocios n : lista_negocios)
+        {
+            if (n.getDistro()==distrito_seleccionado)
+            {
+                lista_negocios_distrito.add(n);
+            }
+        }
+
+        //a la salida de este for, tienes la lista de negocios del distrito seleccioando en
+        //lista_negocios_distrito
 
         //Añado la lista al adapter que a su vez lo coloca en el recycler
         this.recyclerViewNegocios = findViewById(R.id.recicler_negocios);

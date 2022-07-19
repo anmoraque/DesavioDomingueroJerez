@@ -26,12 +26,12 @@ public class DistritosViewHolder extends RecyclerView.ViewHolder{
         this.textView_informacion_distrito = linearPadreFila.findViewById(R.id.informacionDistrito);
 
         //Escucho la linea tocada
-        linearPadreFila.setOnClickListener(new View.OnClickListener() {
+      /*  linearPadreFila.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("ETIQUETA_LOG", "Distrito tocado número: " + getAdapterPosition());
             }
-        });
+        });*/
 
     }
 
