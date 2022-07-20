@@ -4,17 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Spinner;
 
 import com.anmoraque.eldesaviodominguerojerez.adapter.AdapterListaNegocios;
-import com.anmoraque.eldesaviodominguerojerez.model.BaseDatos;
-import com.anmoraque.eldesaviodominguerojerez.model.Distritos;
 import com.anmoraque.eldesaviodominguerojerez.model.Negocios;
 
 import java.util.ArrayList;
@@ -24,7 +17,6 @@ public class PantallaNegociosActivity extends AppCompatActivity {
 
     private RecyclerView recyclerViewNegocios;
     private AdapterListaNegocios adapterListaNegocios;
-    private BaseDatos baseDatos;
     private Integer[] ids_distritos = {1, 2, 3, 4, 5, 6};
 
     @Override
@@ -46,23 +38,31 @@ public class PantallaNegociosActivity extends AppCompatActivity {
         List<Negocios> lista_negocios = new ArrayList<>();
 
                                         //int id, int distrito, int foto, String nombre, String informacion, String horario, String direccion
-        Negocios negocio1 = new Negocios(0, 0, R.drawable.alimentacion, "Alimentación y Bazar", "Tienda típica china con casi de todo.Alimentación, bebidas, droguería, ferretería, papelería, juguetes, lencería, etc.","9:30 – 22:30", "Urbanización, Calle Sevilla, 24", "https://goo.gl/maps/yvTLnoM2NrckKpMe8");
-        Negocios negocio2 = new Negocios(1, 0, R.drawable.alimentacion, "Alimentación y Bazar", "Tienda típica china con casi de todo.Alimentación, bebidas, droguería, ferretería, papelería, juguetes, lencería, etc.","9:30 – 22:30", "Urbanización, Calle Sevilla, 24", "https://goo.gl/maps/yvTLnoM2NrckKpMe8");
-        Negocios negocio3 = new Negocios(2, 0, R.drawable.alimentacion, "Alimentación y Bazar", "Tienda típica china con casi de todo.Alimentación, bebidas, droguería, ferretería, papelería, juguetes, lencería, etc.","9:30 – 22:30", "Urbanización, Calle Sevilla, 24", "https://goo.gl/maps/yvTLnoM2NrckKpMe8");
-        Negocios negocio4 = new Negocios(3, 0, R.drawable.alimentacion, "Alimentación y Bazar", "Tienda típica china con casi de todo.Alimentación, bebidas, droguería, ferretería, papelería, juguetes, lencería, etc.","9:30 – 22:30", "Urbanización, Calle Sevilla, 24", "https://goo.gl/maps/yvTLnoM2NrckKpMe8");
-
-        /** No funciona
-         baseDatos.insertarNegocios(negocio1);
-         baseDatos.insertarNegocios(negocio2);
-         baseDatos.insertarNegocios(negocio3);
-         baseDatos.insertarNegocios(negocio4);
-         */
-
+        Negocios negocio1 = new Negocios(0, 0, R.drawable.cero, "Bazar y alimentación Fang", "Tienda típica china con casi de todo.Alimentación, bebidas, droguería, ferretería, papelería, juguetes, lencería, etc.","9:30 – 24:00", "Avenida de Méjico, 10", "https://g.page/bazarfang?share");
+        Negocios negocio2 = new Negocios(1, 0, R.drawable.uno, "Alimentación", "Tienda típica china con casi de todo.Alimentación, bebidas, droguería, ferretería, papelería, juguetes, lencería, etc.","9:30 – 22:30", "Calle Fernando Viola, 7", "https://goo.gl/maps/ALckMg7aJrUoiEL49");
+        Negocios negocio3 = new Negocios(2, 0, R.drawable.dos, "Super Market", "Tienda típica china con casi de todo.Alimentación, bebidas, droguería, ferretería, papelería, juguetes, lencería, etc.","9:30 – 23:00", "Calle Santo Domingo, 13B", "https://goo.gl/maps/WT1AWwVz9eNzxGZQ7");
+        Negocios negocio4 = new Negocios(3, 0, R.drawable.prueba, "El Capricho Gourmet", "Tienda típica con alimentación y bebidas.","9:30 – 14:30", "Callejón de los Bolos, 24", "https://goo.gl/maps/obzqjksLRjZfJHbi7");
+        Negocios negocio5 = new Negocios(4, 0, R.drawable.cuatro, "Alimentación Jerez - Centro", "Tienda típica con alimentación y bebidas.","9:30 – 14:30", "Calle Santo Domingo", "https://goo.gl/maps/3hLo1bzTiEPvAT6N6");
+        Negocios negocio6 = new Negocios(5, 0, R.drawable.cinco, "Alimentación y Bazar", "Tienda típica china con casi de todo. Alimentación, bebidas, droguería, ferretería, papelería, juguetes, lencería, etc.","9:30 – 22:30", "Urbanización, Calle Sevilla, 24", "https://goo.gl/maps/yvTLnoM2NrckKpMe8");
+        Negocios negocio7 = new Negocios(6, 0, R.drawable.seis, "Kiosco Juan Carlos", "Tienda típica con alimentación, chuches y bebidas.","9:30 – 15:00", "Calle Contadora", "https://goo.gl/maps/9ZvzVGx5v11pkD6h8");
+        Negocios negocio8 = new Negocios(7, 0, R.drawable.siete, "Alimentación confitería Gabriela", "Tienda típica con alimentación, chuches y bebidas.","9:30 – 14:00", "Calle Contadora, 5Z", "https://goo.gl/maps/dyD52gZJ2XBLdaSy6");
+        Negocios negocio9 = new Negocios(8, 0, R.drawable.ocho, "Bazar y Confitería El Almendral", "Tienda típica con alimentación, chuches y bebidas.","9:30 – 14:45", "Avenida De La Comedia Urb, Local 20", "https://g.page/bazarconfiteriaelalmendral?share");
+        Negocios negocio10 = new Negocios(9, 0, R.drawable.nueve, "Alimentación San Joaquin", "Tienda típica con alimentación, chuches y bebidas.","9:30 – 14:00", "Avenida de Sudamérica, 9", "https://goo.gl/maps/dnjQBZiFtMupT5fm8");
+        Negocios negocio11 = new Negocios(10, 0, R.drawable.prueba, "La Esquinita", "Tienda típica con alimentación, chuches y bebidas.","9:30 – 15:00", "Calle Santo Domingo", "https://goo.gl/maps/wLyqLj9WdUHirHzv5");
+        Negocios negocio12 = new Negocios(11, 0, R.drawable.once, "Coviran", "Supermercado de Alimentación.","7:30 – 15:00", "Calle de Montevideo, 30c", "https://goo.gl/maps/sCbTyA4PDarun95u9");
 
         lista_negocios.add(negocio1);
         lista_negocios.add(negocio2);
         lista_negocios.add(negocio3);
         lista_negocios.add(negocio4);
+        lista_negocios.add(negocio5);
+        lista_negocios.add(negocio6);
+        lista_negocios.add(negocio7);
+        lista_negocios.add(negocio8);
+        lista_negocios.add(negocio9);
+        lista_negocios.add(negocio10);
+        lista_negocios.add(negocio11);
+        lista_negocios.add(negocio12);
 
         //Creo la lista Negocios por cada Distrito, que solo lleva negocios del distrito seleccionado
         List<Negocios> lista_negocios_distrito = new ArrayList<Negocios>();

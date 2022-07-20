@@ -68,6 +68,7 @@ public class AdapterListaDistritos extends RecyclerView.Adapter<DistritosViewHol
 
         Distritos list_distritos = lista_distritos.get(position);
         holder.cargarDistritosEnViewHolder(list_distritos);
+        //Cojo la posicion del holder
         holder.itemView.setTag(position);
     }
     /**

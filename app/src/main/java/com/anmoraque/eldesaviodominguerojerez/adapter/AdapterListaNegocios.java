@@ -40,7 +40,9 @@ public class AdapterListaNegocios extends RecyclerView.Adapter<NegociosViewHolde
         View fila_negocio = layoutInflater.inflate(R.layout.fila_negocios, parent, false);
         negociosViewHolder = new NegociosViewHolder(fila_negocio);
 
-
+        /**
+         *Escucho la linea tocada
+         */
         negociosViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,7 +51,7 @@ public class AdapterListaNegocios extends RecyclerView.Adapter<NegociosViewHolde
 
 
 
-                Negocios negocios = new Negocios(negocio_tocado);
+                //Negocios negocios = new Negocios(negocio_tocado);
 
                 Negocios negocios1 = lista_negocios_distrito.get(negocio_tocado);
 
@@ -73,6 +75,7 @@ public class AdapterListaNegocios extends RecyclerView.Adapter<NegociosViewHolde
     public void onBindViewHolder(@NonNull NegociosViewHolder holder, int position) {
         Negocios negociosDistrito = lista_negocios_distrito.get(position);
         holder.cargarNegocioEnViewHolder(negociosDistrito);
+        //Cojo la posicion del holder
         holder.itemView.setTag(position);
     }
 
