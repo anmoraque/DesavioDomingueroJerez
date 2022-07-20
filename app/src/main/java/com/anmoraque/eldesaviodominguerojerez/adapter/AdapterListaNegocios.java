@@ -41,8 +41,6 @@ public class AdapterListaNegocios extends RecyclerView.Adapter<NegociosViewHolde
         negociosViewHolder = new NegociosViewHolder(fila_negocio);
 
 
-        /**
-         *Escucho la linea tocada
         negociosViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,7 +51,9 @@ public class AdapterListaNegocios extends RecyclerView.Adapter<NegociosViewHolde
 
                 Negocios negocios = new Negocios(negocio_tocado);
 
-                String url_maps = negocios.getEnlace_maps();
+                Negocios negocios1 = lista_negocios_distrito.get(negocio_tocado);
+
+                String url_maps = negocios1.getEnlace_maps();
                 Intent intent_abrir_web = new Intent();
                 intent_abrir_web.setAction(Intent.ACTION_VIEW);
                 intent_abrir_web.setData(Uri.parse(url_maps));
@@ -61,7 +61,7 @@ public class AdapterListaNegocios extends RecyclerView.Adapter<NegociosViewHolde
 
             }
         });
-         */
+
 
         return negociosViewHolder;
     }
@@ -73,6 +73,7 @@ public class AdapterListaNegocios extends RecyclerView.Adapter<NegociosViewHolde
     public void onBindViewHolder(@NonNull NegociosViewHolder holder, int position) {
         Negocios negociosDistrito = lista_negocios_distrito.get(position);
         holder.cargarNegocioEnViewHolder(negociosDistrito);
+        holder.itemView.setTag(position);
     }
 
     /**

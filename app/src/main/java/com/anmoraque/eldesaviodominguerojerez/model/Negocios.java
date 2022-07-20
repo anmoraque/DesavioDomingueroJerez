@@ -21,6 +21,7 @@ public class Negocios {
         this.informacion = informacion;
         this.direccion = direccion;
         this.horario = horario;
+        this.enlace_maps = enlace_maps;
     }
 
     public Negocios(int distrito) {
