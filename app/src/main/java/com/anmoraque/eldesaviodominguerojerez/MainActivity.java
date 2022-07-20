@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case 3:
                 saltaActividad(PantallaAyudaActivity.class);
                 break;
-            case 4:
+            case 4://Comparto por whasap o si no tiene por Telegram
                 Intent intent_compartir = new Intent(Intent.ACTION_SEND);
                 String texto_compartir = "Descárgate la APP";
                 texto_compartir = texto_compartir + " " + RUTA_TIENDA;

@@ -25,6 +25,7 @@ public class PantallaCreditosActivity extends AppCompatActivity {
         this.logo_linkedin = findViewById(R.id.logo_linkedin);
         this.logo_github = findViewById(R.id.logo_github);
 
+        //Escucho los logos y le añado la URL
         this.logo_linkedin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

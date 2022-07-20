@@ -37,12 +37,21 @@ public class PantallaDistritosActivity extends AppCompatActivity {
         List<Distritos> lista_distritos = new ArrayList<>();
 
                                             //int id, String nombre, String informacion
-        Distritos distrito1 = new Distritos(1, "Norte", "Plaza del Caballo, Álvaro Domecq, San Joaquín, Torres de Córdoba, El Almendral, Montealto, El Altillo, Las Flores, El Bosque, Parque González Hontoria, Zona Hipercor, Jacaranda.");
-        Distritos distrito2 = new Distritos(2, "Oeste", "Picadueña, San Valentín, Las Torres, Sagrada Familia, La Plata, La Coronación, Icovesa, Juan XXIII, Los Naranjos, El Calvario, Polígono San Benito,  Avd. de la Cruz Roja, La Unión.");
-        Distritos distrito3 = new Distritos(3, "Centro", "San Mateo, San Dionisio, Catedral, Divina Pastora, La Constancia, San Pedro, Pío XII, Vallesequillo, Calle Porvenir, Plaza de las Angustias, Calle Corredera, Madre de Dios, Santiago.");
-        Distritos distrito4 = new Distritos(4, "Sur", "Estancia Barrera, Vista Alegre, Torresoto, Hijuela de las Coles, Federico Mayo, San Telmo, Liberación, El Portal, Blas Infante, Santo Tomás de Aquino, Puertas del Sur, Torres del Sur.");
-        Distritos distrito5 = new Distritos(5, "Noroeste", "El Pelirón, Torresblancas, San José Obrero, La Granja, San Enrique, Los Pinos, Chapín, La Marquesa, Jerez Norte, La Cañada, Avd. Lola Flores, Santa Teresa, Avd. Europa.");
-        Distritos distrito6 = new Distritos(6, "Este", "La Vid, Zafer, La Asunción, Olivar de Rivero, El Retiro, Princijerez, Nueva Andalucía, Montealegre, Pago San José, Parque Atlántico, La Canaleja, La Pita, La Milagrosa, Villa del Este.");
+        Distritos distrito1 = new Distritos(0, "Norte", "Plaza del Caballo, Álvaro Domecq, San Joaquín, Torres de Córdoba, El Almendral, Montealto, El Altillo, Las Flores, El Bosque, Parque González Hontoria, Zona Hipercor, Jacaranda.");
+        Distritos distrito2 = new Distritos(1, "Oeste", "Picadueña, San Valentín, Las Torres, Sagrada Familia, La Plata, La Coronación, Icovesa, Juan XXIII, Los Naranjos, El Calvario, Polígono San Benito,  Avd. de la Cruz Roja, La Unión.");
+        Distritos distrito3 = new Distritos(2, "Centro", "San Mateo, San Dionisio, Catedral, Divina Pastora, La Constancia, San Pedro, Pío XII, Vallesequillo, Calle Porvenir, Plaza de las Angustias, Calle Corredera, Madre de Dios, Santiago.");
+        Distritos distrito4 = new Distritos(3, "Sur", "Estancia Barrera, Vista Alegre, Torresoto, Hijuela de las Coles, Federico Mayo, San Telmo, Liberación, El Portal, Blas Infante, Santo Tomás de Aquino, Puertas del Sur, Torres del Sur.");
+        Distritos distrito5 = new Distritos(4, "Noroeste", "El Pelirón, Torresblancas, San José Obrero, La Granja, San Enrique, Los Pinos, Chapín, La Marquesa, Jerez Norte, La Cañada, Avd. Lola Flores, Santa Teresa, Avd. Europa.");
+        Distritos distrito6 = new Distritos(5, "Este", "La Vid, Zafer, La Asunción, Olivar de Rivero, El Retiro, Princijerez, Nueva Andalucía, Montealegre, Pago San José, Parque Atlántico, La Canaleja, La Pita, La Milagrosa, Villa del Este.");
+
+        /** No funciona
+        baseDatos.insertarDistritos(distrito1);
+        baseDatos.insertarDistritos(distrito2);
+        baseDatos.insertarDistritos(distrito3);
+        baseDatos.insertarDistritos(distrito4);
+        baseDatos.insertarDistritos(distrito5);
+        baseDatos.insertarDistritos(distrito6);
+         */
 
         lista_distritos.add(distrito1);
         lista_distritos.add(distrito2);
@@ -50,6 +59,7 @@ public class PantallaDistritosActivity extends AppCompatActivity {
         lista_distritos.add(distrito4);
         lista_distritos.add(distrito5);
         lista_distritos.add(distrito6);
+
 
         //Añado la lista al adapter que a su vez lo coloca en el recycler
         this.recyclerViewDistritos = findViewById(R.id.recicler_distritos);

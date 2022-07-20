@@ -39,8 +39,8 @@ public class BaseDatos extends SQLiteOpenHelper {
     //insertar Distritos
     public void insertarDistritos (Distritos distritos)
     {
-        SQLiteDatabase sqLiteDatabase = getWritableDatabase(); //INSERT INTO DISTRITOS (id, nombre, etc) VALUES (3, 'JAVI');
-        //importante: AL INTRODUCIR EL VALOR DE UNA COLUMNA TIPO TEXT, (STRING), TIENE QUE ENTRE COMILLAS SIMPLES
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase(); //INSERT INTO DISTRITOS (id, nombre, etc)
+        //importante: AL INTRODUCIR EL VALOR DE UNA COLUMNA TIPO TEXT, (STRING), TIENE QUE IR ENTRE COMILLAS SIMPLES
         String instruccion_sql_inertar_distritos = "INSERT INTO DISTRITOS (id, nombre, informacion) VALUES ("+distritos.getId()+", '"+distritos.getNombre()+"', '"+distritos.getInformacion()+"')";
         Log.d("ETIQUETA_LOG", "INSERTANDO DISTRITOS = " + instruccion_sql_inertar_distritos);
         sqLiteDatabase.execSQL(instruccion_sql_inertar_distritos);
@@ -63,12 +63,37 @@ public class BaseDatos extends SQLiteOpenHelper {
         sqLiteDatabase.close();
     }
 
-    ////obtener Distrito del negocio SELECT - leer
-
-    public List<Negocios> obtenerNeogciosDistrito (Distritos distrito)
+    //obtener Negocios del Distrito
+    public List<Negocios> obtenerNegociosDistrito (Distritos distrito)
     {
-        //SELECT parecida a public List<Coche> obtenerCochesPersona (Persona persona) del ejemplo del curso
-        return null;
+        List<Negocios> lista_negocios = null;
+        SQLiteDatabase sqLiteDatabase = null;
+        String instruccion_consulta = "SELECT modelo  FROM NEGOCIO WHERE iddistritos = " + distrito.getId();
+        Cursor cursor = null;//objeto que me permite recorrer los resultados de una consulta
+        int distro_aux = 0;
+        Negocios negocio_aux = null;
+
+        sqLiteDatabase = this.getReadableDatabase();//obtengo la Base de datos en modo lectura
+        cursor = sqLiteDatabase.rawQuery(instruccion_consulta, null);
+        if (cursor !=null && cursor.getCount()>0) //si la consulta ha recuperado algún registro
+        {
+            Log.d("ETIQUETA_LOG", "La consulta ha recuperado datos");
+            cursor.moveToFirst();
+            lista_negocios = new ArrayList<>(cursor.getCount());
+            //tengo que ir leyendo los negocios
+            //bucle de 1 a N
+            do {
+                distro_aux = cursor.getInt(1);//1 es la segunda columna de la consulta -distro en nuestro caso-
+                negocio_aux = new Negocios(distro_aux);
+                lista_negocios.add(negocio_aux);
+
+            }while (cursor.moveToNext());
+
+            cursor.close();
+        }
+        cerrarBaseDatos(sqLiteDatabase);
+
+        return lista_negocios;
     }
 
 }

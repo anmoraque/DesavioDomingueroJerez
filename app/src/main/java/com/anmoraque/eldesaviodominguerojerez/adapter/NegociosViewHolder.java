@@ -36,14 +36,6 @@ public class NegociosViewHolder extends RecyclerView.ViewHolder {
         this.textView_horario_negocio = linearPadreFila.findViewById(R.id.horario_negocio);
         this.textView_direccion_negocio = linearPadreFila.findViewById(R.id.direccion_negocio);
 
-        //Escucho la linea tocada
-        linearPadreFila.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("ETIQUETA_LOG", "Negocio tocado número: " + getAdapterPosition());
-            }
-        });
-
     }
 
     /**

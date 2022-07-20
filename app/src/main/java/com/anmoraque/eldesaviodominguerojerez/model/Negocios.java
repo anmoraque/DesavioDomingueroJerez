@@ -22,6 +22,12 @@ public class Negocios {
         this.direccion = direccion;
         this.horario = horario;
     }
+
+    public Negocios(int distrito) {
+        //this aparece en el constructor
+        //this representa a la nueva persona que se está creando en este momento
+        this.distro = distrito;
+    }
     public int getId() {
         return this.id;
     }

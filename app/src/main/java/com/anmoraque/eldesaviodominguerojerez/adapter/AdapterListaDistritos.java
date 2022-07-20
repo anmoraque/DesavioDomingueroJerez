@@ -42,16 +42,18 @@ public class AdapterListaDistritos extends RecyclerView.Adapter<DistritosViewHol
         View fila_distrito = layoutInflater.inflate(R.layout.fila_distritos, parent, false);
         distritosViewHolder = new DistritosViewHolder(fila_distrito);
 
-        //Escucho la linea tocada
+        /**
+         *Escucho la linea tocada
+         */
         distritosViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int distrito = (int) v.getTag(); //v es la fila del distrito
                 Log.d("ETIQUETA_LOG", "Distrito tocado número: " + distrito);
+
                 Intent intent = new Intent(v.getContext(), PantallaNegociosActivity.class);
                 intent.putExtra("distrito", distrito);
                 v.getContext().startActivity(intent);
-
             }
         });
 
