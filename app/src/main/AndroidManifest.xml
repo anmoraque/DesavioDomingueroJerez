@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ElDesavioDomingueroJerez"
         tools:targetApi="31">
+
         <activity
             android:name=".PantallaNegociosActivity"
             android:label="Negocios del Distrito"

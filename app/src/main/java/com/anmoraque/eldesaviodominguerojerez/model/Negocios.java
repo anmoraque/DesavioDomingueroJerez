@@ -10,8 +10,9 @@ public class Negocios {
     private String horario;
     private String direccion;
     private String enlace_maps;
+    private String coordenadas;
 
-    public Negocios(int id, int distrito, int foto, String nombre, String informacion, String horario, String direccion, String enlace_maps) {
+    public Negocios(int id, int distrito, int foto, String nombre, String informacion, String horario, String direccion, String enlace_maps, String coordenadas) {
         //this aparece en el constructor
         //this representa al nuevo Negocio que se está creando en este momento
         this.id = id;
@@ -22,6 +23,7 @@ public class Negocios {
         this.direccion = direccion;
         this.horario = horario;
         this.enlace_maps = enlace_maps;
+        this.coordenadas = coordenadas;
     }
 
     public int getId() {
@@ -78,5 +80,11 @@ public class Negocios {
 
     public void setEnlace_maps(String enlace_maps) {
         this.enlace_maps = enlace_maps;
+    }
+
+    public String getCoordenadas() { return this.coordenadas; }
+
+    public void setCoordenadas(String enlace_maps) {
+        this.coordenadas = coordenadas;
     }
 }
