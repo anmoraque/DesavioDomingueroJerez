@@ -23,7 +23,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="500dp"
-                android:src="@drawable/portada_prueba"></ImageView>
+                android:src="@drawable/portada"></ImageView>
 
         </LinearLayout>
 
