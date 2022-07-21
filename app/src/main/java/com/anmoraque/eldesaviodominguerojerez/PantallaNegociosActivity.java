@@ -17,7 +17,6 @@ public class PantallaNegociosActivity extends AppCompatActivity {
 
     private RecyclerView recyclerViewNegocios;
     private AdapterListaNegocios adapterListaNegocios;
-    private Integer[] ids_distritos = {1, 2, 3, 4, 5, 6};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +26,8 @@ public class PantallaNegociosActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //Recuperamos el Intent con el numero de distrito tocado
         int distrito_seleccionado = getIntent().getIntExtra("distrito", 0);
-        //DE FORMA IDEAL, EN LA BASE DE DATOS, DEBERÍAS TENER UN MÉTODO
-        //List<Negocios> obtenerNegociosDeDistrito (distrito_seleccionado)
-        //esto sería parecido al obtenerCochesDePersona del ejemplo que hicimos
-
-
 
         //Creo la lista Negocios
         List<Negocios> lista_negocios = new ArrayList<>();
@@ -64,7 +59,7 @@ public class PantallaNegociosActivity extends AppCompatActivity {
         lista_negocios.add(negocio11);
         lista_negocios.add(negocio12);
 
-        //Creo la lista Negocios por cada Distrito, que solo lleva negocios del distrito seleccionado
+        //Creo una lista nueva de Negocios por cada Distrito, que solo lleva negocios del distrito seleccionado
         List<Negocios> lista_negocios_distrito = new ArrayList<Negocios>();
 
         // Con este for obtengo todos los negocios que pertenecen al distrito seleccionado

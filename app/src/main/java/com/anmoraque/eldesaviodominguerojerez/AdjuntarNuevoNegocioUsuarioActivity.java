@@ -26,10 +26,7 @@ public class AdjuntarNuevoNegocioUsuarioActivity extends AppCompatActivity imple
     private EditText editTextEmail;
     private boolean formularioValido;
 
-    /**
-     * Crea la actividad principal
-     * @param savedInstanceState inicia la actividad
-     */
+    //Crea la actividad principal
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,9 +48,7 @@ public class AdjuntarNuevoNegocioUsuarioActivity extends AppCompatActivity imple
         return true;
     }
 
-    /**
-     * Carga todas las vistas y llama al metodo onFocusChange
-     */
+    //Carga todas las vistas y llama al metodo onFocusChange
     private void iniciarActividad()
     {
         //cargar las vistas
@@ -72,10 +67,7 @@ public class AdjuntarNuevoNegocioUsuarioActivity extends AppCompatActivity imple
         this.editTextEmail.setOnFocusChangeListener(this);
     }
 
-    /**
-     * Valida el editText del teléfono
-     * @return teléfono validado
-     */
+    //Valida el editText del teléfono
     private boolean esTelefonoValido ()
     {
         boolean telefono_valido = false;
@@ -89,10 +81,7 @@ public class AdjuntarNuevoNegocioUsuarioActivity extends AppCompatActivity imple
         return telefono_valido;
     }
 
-    /**
-     * Valida el editText del nombre
-     * @return nombre validado
-     */
+    //Valida el editText del nombre
     private boolean esNombreValido ()
     {
         boolean nombre_valido = false;
@@ -105,10 +94,7 @@ public class AdjuntarNuevoNegocioUsuarioActivity extends AppCompatActivity imple
         return nombre_valido;
     }
 
-    /**
-     * Valida el editText del nombre del negocio
-     * @return nombre del negocio validado
-     */
+    //Valida el editText del nombre del negocio
     private boolean esNombreNegocioValido ()
     {
         boolean nombre_negocio_valido = false;
@@ -121,10 +107,7 @@ public class AdjuntarNuevoNegocioUsuarioActivity extends AppCompatActivity imple
         return nombre_negocio_valido;
     }
 
-    /**
-     * Valida el editText de la dirección
-     * @return dirección validada
-     */
+    //Valida el editText de la dirección
     private boolean esDireccionValida ()
     {
         boolean direccion_valida = false;
@@ -137,10 +120,7 @@ public class AdjuntarNuevoNegocioUsuarioActivity extends AppCompatActivity imple
         return direccion_valida;
     }
 
-    /**
-     * Valida el editText del email
-     * @return email validado
-     */
+    //Valida el editText del email
     private boolean esEmailValido ()
     {
         boolean email_valido = false;
@@ -153,10 +133,7 @@ public class AdjuntarNuevoNegocioUsuarioActivity extends AppCompatActivity imple
         return email_valido;
     }
 
-    /**
-     * Valida el formulario completo
-     * @return formulario validado
-     */
+    //Valida el formulario completo
     private boolean esFormularioValido ()
     {
         //LOS BOOLEAN SE INICIALIZAN A FALSE POR DEFECTO
@@ -203,10 +180,7 @@ public class AdjuntarNuevoNegocioUsuarioActivity extends AppCompatActivity imple
         return formulario_valido;
     }
 
-    /**
-     * Envia el formulario una vez validado
-     * @param view Envia mediante el boton "ACEPTAR" un email con los datos añadidos al formulario
-     */
+    //Envia el formulario una vez validado
     public void mostrarDatosAdjuntarNegocioNuevo(View view) {
         Log.d("ETIQUETA_LOG", "Nombre intro = " + this.editTextNombre.getText().toString());
         Log.d("ETIQUETA_LOG", "Nombre Negocio intro = " + this.editTextNegocio.getText().toString());
@@ -253,11 +227,7 @@ public class AdjuntarNuevoNegocioUsuarioActivity extends AppCompatActivity imple
 
     }
 
-    /**
-     * Es requerido para usar el focus
-     * @param v son las vistas de la actividad
-     * @param hasFocus pone el foco en cada vista que toques
-     */
+    //Es requerido para usar el focus (v son las vistas de la actividad y hasFocus pone el foco en cada vista que toques)
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
 

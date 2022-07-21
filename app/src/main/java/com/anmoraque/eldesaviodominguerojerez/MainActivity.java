@@ -22,10 +22,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private boolean menu_visible;
     private final static String RUTA_TIENDA = "https://play.google.com/store/apps/details?id=com.anmoraque.eldesaviodominguerojerez";
 
-    /**
-     * Crea la actividad principal
-     * @param savedInstanceState inicia menú lateral
-     */
+    //Crea la actividad principal (savedInstanceState inicia menú lateral)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,20 +43,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    /**
-     * Metodo global para cambiar de actividad
-     * @param actividad_destino me manda a la actividad de destino
-     */
+    //Metodo global para cambiar de actividad mediante Intent
     private void saltaActividad(Class actividad_destino) {
         Intent intent = new Intent(this, actividad_destino);
         startActivity(intent);
     }
 
-    /**
-     *
-     * @param item Cuando tocas el icono del menú lo abres
-     * @return
-     */
+    //Cuando tocas el icono del menú lo abres
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         //Toca el icono del menú
@@ -83,11 +73,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     *
-     * @param item Cuando tocas una opción del menú recibes el callback
-     * @return item tocado
-     */
+    //Cuando tocas una opción del menú recibes el callback
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getOrder())

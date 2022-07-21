@@ -12,10 +12,7 @@ import com.anmoraque.eldesaviodominguerojerez.R;
 import com.anmoraque.eldesaviodominguerojerez.model.Negocios;
 
 
-/**
- * Esta clase es una vista invisible que contiene a cada fila visible
- * en un momento dado
- */
+ //Esta clase es una vista invisible que contiene a cada fila visible en un momento dado
 public class NegociosViewHolder extends RecyclerView.ViewHolder {
 
     private ImageView imagen_negocio;
@@ -24,10 +21,7 @@ public class NegociosViewHolder extends RecyclerView.ViewHolder {
     private TextView textView_horario_negocio;
     private TextView textView_direccion_negocio;
 
-    /**
-     * Llamo a todos los views del xml fila_negocios
-     * @param linearPadreFila es la fila_negocios
-     */
+    //Llamo a todos los views del xml fila_negocios (linearPadreFila es la fila_negocios)
     public NegociosViewHolder(@NonNull View linearPadreFila) {
         super(linearPadreFila);
         this.imagen_negocio = linearPadreFila.findViewById(R.id.imagen_negocio);
@@ -38,10 +32,7 @@ public class NegociosViewHolder extends RecyclerView.ViewHolder {
 
     }
 
-    /**
-     * "RELLENAR EL HOLDER" con la información de una fila visible
-     * @param negociosDistrito es la información que uso para rellenar
-     */
+    //"RELLENAR EL HOLDER" con la información (en este caso con el Negocio de cada Distrito) de una fila visible
     public void cargarNegocioEnViewHolder(Negocios negociosDistrito)
     {
         this.imagen_negocio.setImageResource(negociosDistrito.getFoto());

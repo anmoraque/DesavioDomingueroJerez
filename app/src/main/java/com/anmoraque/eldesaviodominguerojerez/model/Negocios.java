@@ -13,7 +13,7 @@ public class Negocios {
 
     public Negocios(int id, int distrito, int foto, String nombre, String informacion, String horario, String direccion, String enlace_maps) {
         //this aparece en el constructor
-        //this representa a la nueva persona que se está creando en este momento
+        //this representa al nuevo Negocio que se está creando en este momento
         this.id = id;
         this.distro = distrito;
         this.foto = foto;
@@ -24,11 +24,6 @@ public class Negocios {
         this.enlace_maps = enlace_maps;
     }
 
-    public Negocios(int distrito) {
-        //this aparece en el constructor
-        //this representa a la nueva persona que se está creando en este momento
-        this.distro = distrito;
-    }
     public int getId() {
         return this.id;
     }

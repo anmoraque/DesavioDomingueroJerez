@@ -44,9 +44,7 @@
                             android:layout_height="wrap_content"
                             android:text="Alimentación y Bazar"
                             android:textColor="@color/purple_500"
-                            android:textSize="20sp"
-                            android:textStyle="bold"
-                            android:gravity="center"
+                            android:textSize="22sp"
                             android:layout_marginLeft="5dp">
                         </TextView>
                         <TextView
@@ -55,6 +53,7 @@
                             android:layout_height="wrap_content"
                             android:text="Tienda típica china con casi de todo.Alimentación, bebidas, droguería, ferretería, papelería, juguetes, lencería, etc."
                             android:textSize="14sp"
+                            android:textColor="@color/black"
                             android:layout_marginLeft="8dp">
                         </TextView>
 
@@ -76,20 +75,19 @@
                         android:id="@+id/enunciado_horario"
                         android:layout_width="100dp"
                         android:layout_height="20dp"
-                        android:text="Horario:"
+                        android:text="Horario"
                         android:gravity="center"
                         android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:layout_marginLeft="5dp">
+                        android:textColor="@color/purple_500">
                     </TextView>
                     <TextView
                         android:id="@+id/horario_negocio"
                         android:layout_width="100dp"
                         android:layout_height="20dp"
                         android:text="9:30 – 22:30"
-                        android:textSize="16sp"
-                        android:gravity="center"
-                        android:layout_marginLeft="5dp">
+                        android:textSize="14sp"
+                        android:textColor="@color/black"
+                        android:gravity="center">
                     </TextView>
 
                 </LinearLayout>
@@ -103,8 +101,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Dirección:"
+                        android:textColor="@color/purple_500"
                         android:textSize="16sp"
-                        android:textStyle="bold"
                         android:layout_marginLeft="5dp">
                     </TextView>
                     <TextView
@@ -113,7 +111,8 @@
                         android:layout_height="wrap_content"
                         android:text="Urbanización, Calle Sevilla, 24"
                         android:textSize="14sp"
-                        android:layout_marginLeft="8dp">
+                        android:textColor="@color/black"
+                        android:layout_marginLeft="5dp">
                     </TextView>
 
                 </LinearLayout>
