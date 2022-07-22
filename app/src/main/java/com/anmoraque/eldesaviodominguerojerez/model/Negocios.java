@@ -4,7 +4,7 @@ public class Negocios {
 
     private int id;
     private int distro;
-    private int foto;
+    private String foto;
     private String nombre;
     private String informacion;
     private String horario;
@@ -12,7 +12,22 @@ public class Negocios {
     private String enlace_maps;
     private String coordenadas;
 
-    public Negocios(int id, int distrito, int foto, String nombre, String informacion, String horario, String direccion, String enlace_maps, String coordenadas) {
+    @Override
+    public String toString() {
+        return "Negocios{" +
+                "id=" + id +
+                ", distro=" + distro +
+                ", foto=" + foto + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", informacion='" + informacion + '\'' +
+                ", horario='" + horario + '\'' +
+                ", direccion='" + direccion + '\'' +
+                ", enlace_maps='" + enlace_maps + '\'' +
+                ", coordenadas='" + coordenadas + '\'' +
+                '}';
+    }
+
+    public Negocios(int id, int distrito, String foto, String nombre, String informacion, String horario, String direccion, String enlace_maps, String coordenadas) {
         //this aparece en el constructor
         //this representa al nuevo Negocio que se está creando en este momento
         this.id = id;
@@ -42,11 +57,11 @@ public class Negocios {
         this.distro = distro;
     }
 
-    public int getFoto() {
+    public String getFoto() {
         return this.foto;
     }
 
-    public void setFoto(int foto) {
+    public void setFoto(String foto) {
         this.foto = foto;
     }
 
