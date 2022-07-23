@@ -17,7 +17,7 @@ public class Negocios {
         return "Negocios{" +
                 "id=" + id +
                 ", distro=" + distro +
-                ", foto=" + foto + '\'' +
+                ", foto='" + foto + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", informacion='" + informacion + '\'' +
                 ", horario='" + horario + '\'' +

@@ -39,7 +39,7 @@ public class AdjuntarNuevoNegocioUsuarioActivity extends AppCompatActivity imple
 
     }
 
-    // Metodo para la accion del boton de ir atras
+    //Metodo para la accion del boton de ir atras
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId()==android.R.id.home) {
@@ -51,15 +51,15 @@ public class AdjuntarNuevoNegocioUsuarioActivity extends AppCompatActivity imple
     //Carga todas las vistas y llama al metodo onFocusChange
     private void iniciarActividad()
     {
-        //cargar las vistas
-        //con this, me estoy refiriendo a la propia pantalla que estoy visualizando en este momento
+        //Cargar las vistas
+        //Con this, me estoy refiriendo a la propia pantalla que estoy visualizando en este momento
         this.editTextNombre = findViewById(R.id.editTextNombre);
         this.editTextNegocio = findViewById(R.id.editTextNegocio);
         this.editTextDireccion = findViewById(R.id.editTextDireccion);
         this.editTextTelefono = findViewById(R.id.editTextTelefono);
         this.editTextEmail = findViewById(R.id.editTextEmail);
 
-        //cuando cambie el foco sobre este elemento, llamas al método onFocusChange de esta clase
+        //Cuando cambie el foco sobre este elemento, llamas al método onFocusChange de esta clase
         this.editTextNombre.setOnFocusChangeListener(this);
         this.editTextNegocio.setOnFocusChangeListener(this);
         this.editTextDireccion.setOnFocusChangeListener(this);
@@ -73,7 +73,7 @@ public class AdjuntarNuevoNegocioUsuarioActivity extends AppCompatActivity imple
         boolean telefono_valido = false;
 
         String telefono = this.editTextTelefono.getText().toString();
-        //con esta expresión regular, estoy diciendo, que el telefono es válido
+        //Con esta expresión regular, estoy diciendo, que el telefono es válido
         //si tiene caracteres del 0 al 9 (dígitos) y al menos uno (+)
         Pattern pattern = Patterns.PHONE;
         telefono_valido = pattern.matcher(telefono).matches();
@@ -87,7 +87,7 @@ public class AdjuntarNuevoNegocioUsuarioActivity extends AppCompatActivity imple
         boolean nombre_valido = false;
 
         String nombre = this.editTextNombre.getText().toString();
-        //con esta expresión regular, estoy diciendo, que el nombre es válido
+        //Con esta expresión regular, estoy diciendo, que el nombre es válido
         //si tiene caracteres del alfabéticos de la a la z mayusculas o minusuclas y espacios y al menos uno (+)
         nombre_valido = (nombre!=null) && nombre.matches("[a-zA-Z áéíóúÁÉÍÓÚñÑ\\s]+");
 
@@ -100,7 +100,7 @@ public class AdjuntarNuevoNegocioUsuarioActivity extends AppCompatActivity imple
         boolean nombre_negocio_valido = false;
 
         String nombre_negocio = this.editTextNegocio.getText().toString();
-        //con esta expresión regular, estoy diciendo, que el nombre del negocio es válido
+        //Con esta expresión regular, estoy diciendo, que el nombre del negocio es válido
         //si tiene caracteres del alfabéticos de la a la z mayusculas o minusuclas y espacios y al menos uno (+)
         nombre_negocio_valido = (nombre_negocio!=null) && nombre_negocio.matches("[a-zA-Z áéíóúÁÉÍÓÚñÑ\\s]+");
 
@@ -113,7 +113,7 @@ public class AdjuntarNuevoNegocioUsuarioActivity extends AppCompatActivity imple
         boolean direccion_valida = false;
 
         String direccion = this.editTextDireccion.getText().toString();
-        //con esta expresión regular, estoy diciendo, que la direccion es válido
+        //Con esta expresión regular, estoy diciendo, que la direccion es válido
         //si tiene caracteres del alfabéticos de la a la z mayusculas o minusculas y espacios y al menos uno (+)
         direccion_valida = (direccion!=null) && direccion.matches("[a-zA-Z0-9,.()áéíóúÁÉÍÓÚñÑ\\s]+");
 
@@ -126,7 +126,7 @@ public class AdjuntarNuevoNegocioUsuarioActivity extends AppCompatActivity imple
         boolean email_valido = false;
 
         String email = this.editTextEmail.getText().toString();
-        //con esta expresión regular, estoy diciendo, que el email es válido
+        //Con esta expresión regular, estoy diciendo, que el email es válido
         Pattern pattern = Patterns.EMAIL_ADDRESS;
         email_valido = pattern.matcher(email).matches();
 
@@ -150,7 +150,8 @@ public class AdjuntarNuevoNegocioUsuarioActivity extends AppCompatActivity imple
         email_valido = esEmailValido();
         telefono_valido = esTelefonoValido();
 
-        if (!telefono_valido) //telefono_valido == false
+        //telefono_valido == false
+        if (!telefono_valido)
         {
             this.editTextTelefono.setError("Introduce un número correcto");
         }

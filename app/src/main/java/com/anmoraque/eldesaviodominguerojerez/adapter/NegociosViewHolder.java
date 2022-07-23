@@ -38,7 +38,7 @@ public class NegociosViewHolder extends RecyclerView.ViewHolder {
     public void cargarNegocioEnViewHolder(Negocios negociosDistrito)
     {
 
-        //necesito cargar la imagen del negocio URL
+        //Necesito cargar la imagen del negocio URL y uso libreria Picasso
         Picasso.get().load(negociosDistrito.getFoto()).into(this.imagen_negocio);
 
         this.textView_nombre_negocio.setText(negociosDistrito.getNombre());

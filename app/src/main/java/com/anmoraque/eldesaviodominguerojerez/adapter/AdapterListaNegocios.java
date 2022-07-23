@@ -16,8 +16,7 @@ import com.anmoraque.eldesaviodominguerojerez.PantallaNegociosActivity;
 import com.anmoraque.eldesaviodominguerojerez.R;
 import com.anmoraque.eldesaviodominguerojerez.model.Negocios;
 
-
- //Creo el adapter que rellenará el holder
+//Creo el adapter que rellenará el holder
 public class AdapterListaNegocios extends RecyclerView.Adapter<NegociosViewHolder> {
 
     private List<Negocios> lista_negocios_distrito;
@@ -27,7 +26,7 @@ public class AdapterListaNegocios extends RecyclerView.Adapter<NegociosViewHolde
         this.lista_negocios_distrito = list_negocios;
     }
 
-     //Este método "infla el holder"
+    //Este método "infla el holder"
     @NonNull
     @Override
     public NegociosViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -37,7 +36,7 @@ public class AdapterListaNegocios extends RecyclerView.Adapter<NegociosViewHolde
         View fila_negocio = layoutInflater.inflate(R.layout.fila_negocios, parent, false);
         negociosViewHolder = new NegociosViewHolder(fila_negocio);
 
-         //Escucho la linea tocada
+        //Escucho la linea tocada
         negociosViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,7 +56,7 @@ public class AdapterListaNegocios extends RecyclerView.Adapter<NegociosViewHolde
         return negociosViewHolder;
     }
 
-     //Este método "rellena un holder" - lo recicla
+    //Este método "rellena un holder" - lo recicla
     @Override
     public void onBindViewHolder(@NonNull NegociosViewHolder holder, int position) {
         Negocios negociosDistrito = lista_negocios_distrito.get(position);
@@ -66,7 +65,7 @@ public class AdapterListaNegocios extends RecyclerView.Adapter<NegociosViewHolde
         holder.itemView.setTag(position);
     }
 
-     //Va a rellenar el holder hasta el final de la lista
+    //Va a rellenar el holder hasta el final de la lista
     @Override
     public int getItemCount() {
         return lista_negocios_distrito.size();

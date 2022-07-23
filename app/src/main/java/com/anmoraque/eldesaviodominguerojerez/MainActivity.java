@@ -90,25 +90,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case 3:
                 saltaActividad(PantallaAyudaActivity.class);
                 break;
-            case 4://Comparto por whasap o si no tiene por Telegram
+            case 4:
+                //Comparto por whasap o si no tiene por Telegram
                 Intent intent_compartir = new Intent(Intent.ACTION_SEND);
                 String texto_compartir = "Descárgate la APP";
                 texto_compartir = texto_compartir + " " + RUTA_TIENDA;
                 intent_compartir.putExtra(Intent.EXTRA_TEXT, texto_compartir);
-                intent_compartir.setType("text/plain");//tipo de dato que quiero compartir TIPO MIME
+                //Tipo de dato que quiero compartir TIPO MIME
+                intent_compartir.setType("text/plain");
                 intent_compartir.setPackage("com.whatsapp");
 
                 if (intent_compartir.resolveActivity(getPackageManager()) != null)
                 {
-                    //tiene whatsapp
+                    //Tiene whatsapp
                     startActivity(intent_compartir);
                 }else {
 
+                    //Tiene telegram
                     intent_compartir.setPackage("org.telegram.messenger");
                     if (intent_compartir.resolveActivity(getPackageManager()) != null)
                     {
                         startActivity(intent_compartir);
                     } else {
+                        //No tiene ni whasap ni telegram
                         Toast.makeText(this, "Descárgate la APP", Toast.LENGTH_LONG).show();
                     }
 

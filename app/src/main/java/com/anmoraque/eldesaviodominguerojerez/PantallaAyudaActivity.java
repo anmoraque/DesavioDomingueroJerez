@@ -16,7 +16,7 @@ public class PantallaAyudaActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    // Metodo para la accion del boton de ir atras
+    //Metodo para la accion del boton de ir atras
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId()==android.R.id.home) {

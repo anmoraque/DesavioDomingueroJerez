@@ -1,8 +1,8 @@
 package com.anmoraque.eldesaviodominguerojerez.model;
 
 
-//va a ser el programa "ROJO"- AsyncTask
-//en el interior de esta clase, se va a producir la comunicación
+//AsyncTask
+//En el interior de esta clase, se va a producir la comunicación
 //HTTP con el servidor
 
 import android.content.Context;
@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-//String - paramétro de entrada
+//VOID - paramétro de entrada
 //VOID - no voy a contabilizar el avance no uso ningún número
 //List<Negocios>> tipo de dato devuelto
 public class ObtenerDatos extends AsyncTask<Void, Void, List<Negocios>> {
@@ -35,36 +35,46 @@ public class ObtenerDatos extends AsyncTask<Void, Void, List<Negocios>> {
         this.actividad_llamante = context;
     }
 
-    @Override //en este método, se lleva a cabo la comunicación HTTP
+    //En este método, se lleva a cabo la comunicación HTTP
+    @Override
     protected List<Negocios> doInBackground(Void... vacio) {
+
         List<Negocios> lista_negocios = null;
-        URL url = null; //aquí vamos a poner la ruta
-        HttpURLConnection httpURLConnection = null;//esta clase representa el mensajes / la comunicación http
-        Gson gson = null;//este objeto me ayuda a (des)serializar JSON a JAVA
-        InputStreamReader inputStreamReader = null; //leo el cuerpo del mensaje
+        //Aquí vamos a poner la ruta
+        URL url = null;
+        //Esta clase representa el mensajes / la comunicación http
+        HttpURLConnection httpURLConnection = null;
+        //Este objeto me ayuda a (des)serializar JSON a JAVA
+        Gson gson = null;
+        //Leo el cuerpo del mensaje
+        InputStreamReader inputStreamReader = null;
         try {
-            //el proceso de comunicación es susceptible de lanzar una execepción
+            //El proceso de comunicación es susceptible de lanzar una execepción
             //por eso, vamos a agruparlo en un try-catch
             url = new URL(URL_NEGOCIOS);
             Log.d("ETIQUETA_LOG", "URL búsqueda url = " + url);
-            httpURLConnection = (HttpURLConnection) url.openConnection(); //porque sé que el tipo de conexión es HTTP
-            httpURLConnection.setRequestMethod("GET");//consultar, obtener info del servidor, no envío nada (el cuerpo de la petición ,va vacío)
-            if (httpURLConnection.getResponseCode() == HttpURLConnection.HTTP_OK) //200
+            //Porque sé que el tipo de conexión es HTTP
+            httpURLConnection = (HttpURLConnection) url.openConnection();
+            //Consultar, obtener info del servidor, no envío nada (el cuerpo de la petición ,va vacío)
+            httpURLConnection.setRequestMethod("GET");
+            //HTTP_OK es 200
+            if (httpURLConnection.getResponseCode() == HttpURLConnection.HTTP_OK)
             {
                 Log.d("ETIQUETA_LOG", "La conexión ha ido bien! - Respuesta OK");
-                //accedo al cuerpo de la respuesta httpURLConnection.getInputStream()
-                //uso la clase InputStream para leer ese cuerpo
+                //Accedo al cuerpo de la respuesta httpURLConnection.getInputStream()
+                //Uso la clase InputStream para leer ese cuerpo
                 Log.d("ETIQUETA_LOG", "Obtenidos " +httpURLConnection.getContentLength() + " bytes" );
                 Log.d("ETIQUETA_LOG", "TIPO MIME " +httpURLConnection.getContentType() );
                 inputStreamReader = new InputStreamReader(httpURLConnection.getInputStream());
-                gson = new Gson(); //para pasar el cuerpo de JSON a la lista de negocios
+                //Para pasar el cuerpo de JSON a la lista de negocios
+                gson = new Gson();
                 lista_negocios = gson.fromJson(inputStreamReader, List.class);
             }
 
         } catch (Exception e) {
             Log.e("ETIQUETA_LOG", "Algo ha salido mal", e);
         } finally {
-            //liberar recursos
+            //Liberar recursos
             try {
                 inputStreamReader.close();
 
@@ -73,19 +83,18 @@ public class ObtenerDatos extends AsyncTask<Void, Void, List<Negocios>> {
             }
             httpURLConnection.disconnect();
 
-
         }
-
 
         return lista_negocios;
     }
 
-    @Override //este otro método, es invocado, al finalizar la conexión
+    //Este otro método, es invocado, al finalizar la conexión
+    @Override
     protected void onPostExecute(List<Negocios> resultadoListaNegocios
     ) {
-        //super.onPostExecute(resultadoListaNegocios);
+
         Log.d("ETIQUETA_LOG", "en onPostExecute ... comunicación terminada");
-        //¿Cómo le aviso a la clase MAIN que he acabado ?¿
+        //¿Cómo le aviso a la clase PantallaNegociosActivity que he acabado ?¿
         PantallaNegociosActivity actividad_negocios = ((PantallaNegociosActivity) this.actividad_llamante);
         actividad_negocios.mostrarResultados(resultadoListaNegocios);
 
