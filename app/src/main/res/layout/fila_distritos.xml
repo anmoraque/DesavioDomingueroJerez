@@ -26,7 +26,7 @@
                 android:id="@+id/nombreDistrito"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Distrito"
+                android:text="Distrito N"
                 android:textSize="26sp"
                 android:textColor="@color/purple_500"
                 android:gravity="center">
