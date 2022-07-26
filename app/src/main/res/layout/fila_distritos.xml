@@ -26,7 +26,7 @@
                 android:id="@+id/nombreDistrito"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Distrito Norte"
+                android:text="Distrito"
                 android:textSize="26sp"
                 android:textColor="@color/purple_500"
                 android:gravity="center">
@@ -39,7 +39,7 @@
                 android:gravity="center"
                 android:textSize="16sp"
                 android:textColor="@color/black"
-                android:text="Plaza del Caballo, Álvaro Domecq, San Joaquín, Torres de Córdoba, El Almendral, Montealto, El Altillo, Las Flores, El Bosque, Parque González Hontoria, Zona Hipercor, Jacaranda.">
+                android:text="Prueba">
 
             </TextView>
         </LinearLayout>
