@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import com.anmoraque.eldesaviodominguerojerez.PantallaNegociosActivity;
 import com.anmoraque.eldesaviodominguerojerez.R;
 import com.anmoraque.eldesaviodominguerojerez.model.Negocios;
 
