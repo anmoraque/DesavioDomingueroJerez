@@ -8,15 +8,16 @@ package com.anmoraque.eldesaviodominguerojerez.model;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-
+import java.lang.reflect.Type;
+import com.google.gson.reflect.TypeToken;
 import com.anmoraque.eldesaviodominguerojerez.PantallaNegociosActivity;
 import com.google.gson.Gson;
-
+import java.util.ArrayList;
+import java.util.List;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.List;
 
 
 //VOID - paramétro de entrada
@@ -66,7 +67,10 @@ public class ObtenerDatos extends AsyncTask<Void, Void, List<Negocios>> {
                 inputStreamReader = new InputStreamReader(httpURLConnection.getInputStream());
                 //Para pasar el cuerpo de JSON a la lista de negocios
                 gson = new Gson();
-                lista_negocios = gson.fromJson(inputStreamReader, List.class);
+                //Pasar el tipo lista a Negocios
+                Type listType = new TypeToken<ArrayList<Negocios>>(){}.getType();
+                lista_negocios = gson.fromJson(inputStreamReader, listType);
+
             }
 
         } catch (Exception e) {
