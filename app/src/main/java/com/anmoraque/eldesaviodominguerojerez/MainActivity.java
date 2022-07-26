@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (item.getOrder())
         {
             case 0:
-                saltaActividad(PantallaMapaUbicacionActivity.class);
+                saltaActividad(MapsActivity.class);
                 break;
             case 1:
                 saltaActividad(PantallaDistritosActivity.class);
@@ -130,6 +130,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     //Linear para ir directamente a Mapas
     public void IrAMapas(View view) {
-        saltaActividad(PantallaMapaUbicacionActivity.class);
+        saltaActividad(MapsActivity.class);
     }
 }
