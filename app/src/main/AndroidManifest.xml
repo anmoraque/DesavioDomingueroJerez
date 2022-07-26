@@ -4,6 +4,7 @@
     package="com.anmoraque.eldesaviodominguerojerez">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -29,7 +30,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="YOUR_API_KEY" />
+            android:value="AIzaSyC9bQSZr_uUF_EoojHqajpmfpxf_7MCqts" />
 
         <activity
             android:name=".MapsActivity"
