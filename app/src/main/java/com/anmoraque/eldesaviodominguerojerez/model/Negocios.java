@@ -10,10 +10,23 @@ public class Negocios {
     private String horario;
     private String direccion;
     private String enlace_maps;
-    private float latitude;
-    private float longitude;
+    private double latitude;
+    private double longitude;
 
     public Negocios(int id, int distro, String foto, String nombre, String informacion, String horario, String direccion, String enlace_maps, float latitude, float longitude) {
+        this.id = id;
+        this.distro = distro;
+        this.foto = foto;
+        this.nombre = nombre;
+        this.informacion = informacion;
+        this.horario = horario;
+        this.direccion = direccion;
+        this.enlace_maps = enlace_maps;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+    public Negocios(int id, int distro, String foto, String nombre, String informacion, String horario, String direccion, String enlace_maps, double latitude, double longitude) {
         this.id = id;
         this.distro = distro;
         this.foto = foto;
@@ -106,19 +119,19 @@ public class Negocios {
         this.enlace_maps = enlace_maps;
     }
 
-    public float getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(float latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
-    public float getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(float longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 }

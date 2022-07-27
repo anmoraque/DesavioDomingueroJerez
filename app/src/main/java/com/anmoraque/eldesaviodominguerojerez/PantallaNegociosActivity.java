@@ -61,6 +61,7 @@ public class PantallaNegociosActivity extends AppCompatActivity {
             }
         }
 
+
         //Añado la lista_negocios al adapter que a su vez lo coloca en el recycler
         this.recyclerViewNegocios = findViewById(R.id.recicler_negocios);
         this.adapterListaNegocios = new AdapterListaNegocios(lista_negocios_distrito);
