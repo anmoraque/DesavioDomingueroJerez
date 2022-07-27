@@ -47,9 +47,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Negocios negocios1 = new Negocios(0, 0, "https://i.postimg.cc/W12LLF80/cero.jpg", "Bazar y alimentación Fang", "Tienda típica china con casi de todo.Alimentación, bebidas, droguería, ferretería, papelería, juguetes, lencería, etc.", "9:30 – 24:00", "Avenida de Méjico, 10", "https://g.page/bazarfang?share", 36.69304034794886, -6.128592426981506);
         Negocios negocios2 = new Negocios(1, 0, "https://i.postimg.cc/W12LLF80/cero.jpg", "Alimentación", "Tienda típica china con casi de todo.Alimentación, bebidas, droguería, ferretería, papelería, juguetes, lencería, etc.", "9:30 – 24:00", "Avenida de Méjico, 10", "https://g.page/bazarfang?share", 36.691556145354966, -6.129519653372688);
         Negocios negocios3 = new Negocios(2, 0, "https://i.postimg.cc/W12LLF80/cero.jpg", "Super Market", "Tienda típica china con casi de todo.Alimentación, bebidas, droguería, ferretería, papelería, juguetes, lencería, etc.", "9:30 – 24:00", "Avenida de Méjico, 10", "https://g.page/bazarfang?share", 36.691246241669866, -6.13201195337269);
+        Negocios negocios4 = new Negocios(3, 0, "https://i.postimg.cc/W12LLF80/cero.jpg", "El Capricho Gourmet", "Tienda típica china con casi de todo.Alimentación, bebidas, droguería, ferretería, papelería, juguetes, lencería, etc.", "9:30 – 24:00", "Avenida de Méjico, 10", "https://g.page/bazarfang?share", 36.68957179020865, -6.135919282209103);
         lista_negocios.add(negocios1);
         lista_negocios.add(negocios2);
         lista_negocios.add(negocios3);
+        lista_negocios.add(negocios4);
 
 
         // Con este for each obtengo todos los negocios de la lista para añadirlos a cada marcador
