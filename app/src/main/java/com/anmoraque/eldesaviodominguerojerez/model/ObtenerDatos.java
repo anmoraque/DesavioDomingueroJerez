@@ -9,6 +9,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 import java.lang.reflect.Type;
+
 import com.google.gson.reflect.TypeToken;
 import com.anmoraque.eldesaviodominguerojerez.PantallaNegociosActivity;
 import com.google.gson.Gson;
@@ -27,7 +28,7 @@ public class ObtenerDatos extends AsyncTask<Void, Void, List<Negocios>> {
 
     private static final String URL_NEGOCIOS = "https://my-json-server.typicode.com/anmoraque/basedatosdesavio/negocios/";
 
-    private Context actividad_llamante;//MainActivity
+    private Context actividad_llamante;//PantallaNegociosActivity
 
     public ObtenerDatos(Context context)
     {
@@ -96,7 +97,7 @@ public class ObtenerDatos extends AsyncTask<Void, Void, List<Negocios>> {
     ) {
 
         Log.d("ETIQUETA_LOG", "en onPostExecute ... comunicación terminada");
-        //¿Cómo le aviso a la clase PantallaNegociosActivity que he acabado ?¿
+        //¿Cómo le aviso a la clase PantallaNegociosActivity que he acabado?
         PantallaNegociosActivity actividad_negocios = ((PantallaNegociosActivity) this.actividad_llamante);
         actividad_negocios.mostrarResultados(resultadoListaNegocios);
 

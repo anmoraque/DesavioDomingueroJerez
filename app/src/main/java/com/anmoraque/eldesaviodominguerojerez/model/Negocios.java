@@ -10,7 +10,21 @@ public class Negocios {
     private String horario;
     private String direccion;
     private String enlace_maps;
-    private String coordenadas;
+    private float latitude;
+    private float longitude;
+
+    public Negocios(int id, int distro, String foto, String nombre, String informacion, String horario, String direccion, String enlace_maps, float latitude, float longitude) {
+        this.id = id;
+        this.distro = distro;
+        this.foto = foto;
+        this.nombre = nombre;
+        this.informacion = informacion;
+        this.horario = horario;
+        this.direccion = direccion;
+        this.enlace_maps = enlace_maps;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
 
     @Override
     public String toString() {
@@ -23,26 +37,13 @@ public class Negocios {
                 ", horario='" + horario + '\'' +
                 ", direccion='" + direccion + '\'' +
                 ", enlace_maps='" + enlace_maps + '\'' +
-                ", coordenadas='" + coordenadas + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
                 '}';
     }
 
-    public Negocios(int id, int distrito, String foto, String nombre, String informacion, String horario, String direccion, String enlace_maps, String coordenadas) {
-        //this aparece en el constructor
-        //this representa al nuevo Negocio que se está creando en este momento
-        this.id = id;
-        this.distro = distrito;
-        this.foto = foto;
-        this.nombre = nombre;
-        this.informacion = informacion;
-        this.direccion = direccion;
-        this.horario = horario;
-        this.enlace_maps = enlace_maps;
-        this.coordenadas = coordenadas;
-    }
-
     public int getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(int id) {
@@ -50,7 +51,7 @@ public class Negocios {
     }
 
     public int getDistro() {
-        return this.distro;
+        return distro;
     }
 
     public void setDistro(int distro) {
@@ -58,48 +59,66 @@ public class Negocios {
     }
 
     public String getFoto() {
-        return this.foto;
+        return foto;
     }
 
     public void setFoto(String foto) {
         this.foto = foto;
     }
 
-    public String getNombre() { return this.nombre; }
+    public String getNombre() {
+        return nombre;
+    }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
     public String getInformacion() {
-        return this.informacion;
+        return informacion;
     }
 
     public void setInformacion(String informacion) {
         this.informacion = informacion;
     }
 
-    public String getDireccion() { return this.direccion; }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+    public String getHorario() {
+        return horario;
     }
-
-    public String getHorario() { return this.horario; }
 
     public void setHorario(String horario) {
         this.horario = horario;
     }
 
-    public String getEnlace_maps() { return this.enlace_maps; }
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getEnlace_maps() {
+        return enlace_maps;
+    }
 
     public void setEnlace_maps(String enlace_maps) {
         this.enlace_maps = enlace_maps;
     }
 
-    public String getCoordenadas() { return this.coordenadas; }
+    public float getLatitude() {
+        return latitude;
+    }
 
-    public void setCoordenadas(String enlace_maps) {
-        this.coordenadas = coordenadas;
+    public void setLatitude(float latitude) {
+        this.latitude = latitude;
+    }
+
+    public float getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(float longitude) {
+        this.longitude = longitude;
     }
 }
