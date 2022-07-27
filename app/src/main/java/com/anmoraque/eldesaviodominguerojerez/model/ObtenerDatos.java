@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import java.lang.reflect.Type;
 
+import com.anmoraque.eldesaviodominguerojerez.MapsActivity;
 import com.google.gson.reflect.TypeToken;
 import com.anmoraque.eldesaviodominguerojerez.PantallaNegociosActivity;
 import com.google.gson.Gson;
@@ -98,8 +99,15 @@ public class ObtenerDatos extends AsyncTask<Void, Void, List<Negocios>> {
 
         Log.d("ETIQUETA_LOG", "en onPostExecute ... comunicación terminada");
         //¿Cómo le aviso a la clase PantallaNegociosActivity que he acabado?
+        if(this.actividad_llamante instanceof PantallaNegociosActivity){
         PantallaNegociosActivity actividad_negocios = ((PantallaNegociosActivity) this.actividad_llamante);
-        actividad_negocios.mostrarResultados(resultadoListaNegocios);
+        actividad_negocios.mostrarResultados(resultadoListaNegocios);}
+        else
+            if (this.actividad_llamante instanceof MapsActivity){
+            MapsActivity actividad_negocios_mapa = ((MapsActivity) this.actividad_llamante);
+            actividad_negocios_mapa.mostrarResultados(resultadoListaNegocios);
+        }
+
 
     }
 }
