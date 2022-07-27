@@ -29,7 +29,7 @@ public class ObtenerDatos extends AsyncTask<Void, Void, List<Negocios>> {
 
     private static final String URL_NEGOCIOS = "https://my-json-server.typicode.com/anmoraque/basedatosdesavio/negocios/";
 
-    private Context actividad_llamante;//PantallaNegociosActivity
+    private Context actividad_llamante;//PantallaActivity donde necesito obtenerDatos
 
     public ObtenerDatos(Context context)
     {
@@ -98,7 +98,8 @@ public class ObtenerDatos extends AsyncTask<Void, Void, List<Negocios>> {
     ) {
 
         Log.d("ETIQUETA_LOG", "en onPostExecute ... comunicación terminada");
-        //¿Cómo le aviso a la clase PantallaNegociosActivity que he acabado?
+        //¿Cómo le aviso a la Activity que he acabado?
+        //Segun necesite PantallaNegociosActivity o MapsActivity llevo el resultado
         if(this.actividad_llamante instanceof PantallaNegociosActivity){
         PantallaNegociosActivity actividad_negocios = ((PantallaNegociosActivity) this.actividad_llamante);
         actividad_negocios.mostrarResultados(resultadoListaNegocios);}
@@ -107,7 +108,6 @@ public class ObtenerDatos extends AsyncTask<Void, Void, List<Negocios>> {
             MapsActivity actividad_negocios_mapa = ((MapsActivity) this.actividad_llamante);
             actividad_negocios_mapa.mostrarResultados(resultadoListaNegocios);
         }
-
 
     }
 }
