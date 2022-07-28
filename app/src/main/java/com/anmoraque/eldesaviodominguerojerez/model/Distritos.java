@@ -7,8 +7,7 @@ public class Distritos {
     private String informacion;
 
     public Distritos(int id, String nombre, String informacion) {
-        //this aparece en el constructor
-        //this representa al nuevo Distrito que se está creando en este momento
+
         this.id = id;
         this.nombre = nombre;
         this.informacion = informacion;

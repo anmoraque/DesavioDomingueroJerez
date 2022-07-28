@@ -26,11 +26,11 @@ import java.net.URL;
 //VOID - no voy a contabilizar el avance no uso ningún número
 //List<Negocios>> tipo de dato devuelto
 public class ObtenerDatos extends AsyncTask<Void, Void, List<Negocios>> {
-
+    //Web del servidor de la lista en este caso en Github
     private static final String URL_NEGOCIOS = "https://my-json-server.typicode.com/anmoraque/basedatosdesavio/negocios/";
-
-    private Context actividad_llamante;//PantallaActivity donde necesito obtenerDatos
-
+    //PantallaActivity donde necesito obtenerDatos
+    private Context actividad_llamante;
+    //Metodo para obtener los datos
     public ObtenerDatos(Context context)
     {
         this.actividad_llamante = context;
@@ -39,7 +39,7 @@ public class ObtenerDatos extends AsyncTask<Void, Void, List<Negocios>> {
     //En este método, se lleva a cabo la comunicación HTTP
     @Override
     protected List<Negocios> doInBackground(Void... vacio) {
-
+        //Lista vacia
         List<Negocios> lista_negocios = null;
         //Aquí vamos a poner la ruta
         URL url = null;
@@ -58,7 +58,7 @@ public class ObtenerDatos extends AsyncTask<Void, Void, List<Negocios>> {
             httpURLConnection = (HttpURLConnection) url.openConnection();
             //Consultar, obtener info del servidor, no envío nada (el cuerpo de la petición ,va vacío)
             httpURLConnection.setRequestMethod("GET");
-            //HTTP_OK es 200
+            //HTTP_OK es 200 conexion bien
             if (httpURLConnection.getResponseCode() == HttpURLConnection.HTTP_OK)
             {
                 Log.d("ETIQUETA_LOG", "La conexión ha ido bien! - Respuesta OK");
@@ -74,9 +74,10 @@ public class ObtenerDatos extends AsyncTask<Void, Void, List<Negocios>> {
                 lista_negocios = gson.fromJson(inputStreamReader, listType);
 
             }
-
+        //Si va mal
         } catch (Exception e) {
             Log.e("ETIQUETA_LOG", "Algo ha salido mal", e);
+        //Vaya bien o mal finalizo recursos
         } finally {
             //Liberar recursos
             try {
@@ -94,20 +95,21 @@ public class ObtenerDatos extends AsyncTask<Void, Void, List<Negocios>> {
 
     //Este otro método, es invocado, al finalizar la conexión
     @Override
-    protected void onPostExecute(List<Negocios> resultadoListaNegocios
-    ) {
-
+    protected void onPostExecute(List<Negocios> resultadoListaNegocios)
+    {
         Log.d("ETIQUETA_LOG", "en onPostExecute ... comunicación terminada");
         //¿Cómo le aviso a la Activity que he acabado?
-        //Segun necesite PantallaNegociosActivity o MapsActivity llevo el resultado
-        if(this.actividad_llamante instanceof PantallaNegociosActivity){
-        PantallaNegociosActivity actividad_negocios = ((PantallaNegociosActivity) this.actividad_llamante);
-        actividad_negocios.mostrarResultados(resultadoListaNegocios);}
-        else
-            if (this.actividad_llamante instanceof MapsActivity){
-            MapsActivity actividad_negocios_mapa = ((MapsActivity) this.actividad_llamante);
-            actividad_negocios_mapa.mostrarResultados(resultadoListaNegocios);
-        }
+        //Segun necesite PantallaNegociosActivity o MapsActivity llevo el resultado mediante if
+        if (this.actividad_llamante instanceof PantallaNegociosActivity)
+        {
+            PantallaNegociosActivity actividad_negocios = ((PantallaNegociosActivity) this.actividad_llamante);
+            actividad_negocios.mostrarResultados(resultadoListaNegocios);
+
+        } if (this.actividad_llamante instanceof MapsActivity)
+            {
+                MapsActivity actividad_negocios_mapa = ((MapsActivity) this.actividad_llamante);
+                actividad_negocios_mapa.mostrarResultados(resultadoListaNegocios);
+            }
 
     }
 }
