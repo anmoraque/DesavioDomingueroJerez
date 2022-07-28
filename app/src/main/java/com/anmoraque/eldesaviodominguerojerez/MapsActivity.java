@@ -122,7 +122,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 //Hago zoom para ver mas cerca el marcador centro_jerez
                 LatLng centro_jerez = new LatLng (36.69489595157947, -6.125560997547282);
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(centro_jerez,  13));
-                //Este metodo escucha el cambio de marcadores en el mapa
+                //Este metodo escucha el cambio de marcadores (el icono) en el mapa
                 mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                     @Override
                     public boolean onMarkerClick(@NonNull Marker marker) {
@@ -132,10 +132,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         return false;
                     }
                 });
-
             }
 
-        //Escucha el marcador tocado
+        //Escucha el texto (Donde sale el titulo) del marcador tocado
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {

@@ -27,6 +27,7 @@ public class AdjuntarNuevoNegocioUsuarioActivity extends AppCompatActivity imple
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adjuntar_nuevo_negocio_usuario);
+
         //Boton de ir atras
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

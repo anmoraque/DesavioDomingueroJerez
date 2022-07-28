@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //Forzar a no usar el tema night
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
+        //Boton de el menu
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //Con esta instrucción personalizo el icono del menú que abre
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24);
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         this.drawerLayout = findViewById(R.id.drawer);
         //El propio menú lateral
         this.navigationView = findViewById(R.id.navview);
-
+        //Escuchando el menu
         this.navigationView.setNavigationItemSelectedListener(this);
 
     }
@@ -79,18 +80,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getOrder())
         {
+            //Buscador por mapa
             case 0:
                 saltaActividad(MapsActivity.class);
                 break;
+            //Buscador por distritos
             case 1:
                 saltaActividad(PantallaDistritosActivity.class);
                 break;
+            //Adjuntar negocio nuevo
             case 2:
                 saltaActividad(AdjuntarNuevoNegocioUsuarioActivity.class);
                 break;
+            //Ayuda sobre la App
             case 3:
                 saltaActividad(PantallaAyudaActivity.class);
                 break;
+            //Compartir
             case 4:
                 //Comparto por whasap o si no tiene por Telegram
                 Intent intent_compartir = new Intent(Intent.ACTION_SEND);
@@ -118,6 +124,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
                 }
                 break;
+            //Creditos
             case 5:
                 saltaActividad(PantallaCreditosActivity.class);
                 break;
