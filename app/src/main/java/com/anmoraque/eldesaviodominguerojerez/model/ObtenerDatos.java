@@ -7,7 +7,11 @@ package com.anmoraque.eldesaviodominguerojerez.model;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.util.Log;
+
+import androidx.annotation.RequiresApi;
+
 import java.lang.reflect.Type;
 
 import com.anmoraque.eldesaviodominguerojerez.MapsActivity;
@@ -94,6 +98,7 @@ public class ObtenerDatos extends AsyncTask<Void, Void, List<Negocios>> {
     }
 
     //Este otro método, es invocado, al finalizar la conexión
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onPostExecute(List<Negocios> resultadoListaNegocios)
     {

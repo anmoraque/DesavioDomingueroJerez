@@ -113,7 +113,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 negocios = this.lista_negocios.get(num_negocio);
                 //Añado latitud y longitud al marcador
                 LatLng n = new LatLng (negocios.getLatitude(), negocios.getLongitude());
-                //Añado el titulo, descripcion al marcador
+                //Añado el titulo, descripcion e icono al marcador
                 Marker marcador = mMap.addMarker(new MarkerOptions().position(n).title(negocios.getNombre())
                         .snippet(negocios.getDireccion()).icon(BitmapDescriptorFactory.fromResource(R.drawable.tienda)));
                 //Pongo el num_negocio al Tag del marcador
@@ -134,7 +134,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 //Negocio_tocado es igual al negocio de la lista_negocios
                 Negocios negocio_tocado = MapsActivity.this.lista_negocios.get(num_negocio_tocado);
 
-                //Añado la informacion del negocio_tocado a la cardView
+                //Añado toda la informacion del negocio_tocado a la cardView
                 textView_nombre_negocio.setText(negocio_tocado.getNombre());
                 textView_informacion_negocio.setText(negocio_tocado.getInformacion());
                 textView_horario_negocio.setText(negocio_tocado.getHorario());
@@ -144,6 +144,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 //Pongo visible la cardView
                 cardView.setVisibility(View.VISIBLE);
+
                 //Escucho el cardView
                 cardView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -158,6 +159,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
     }
+
     //Se invoca cuando se ha terminado de cargar el mapa
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -181,31 +183,36 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     {
         Log.d("ETIQUETA_LOG", "Mostrando la ubicación obtenida");
         LatLng ubicacion_actual =  new LatLng(location.getLatitude(),location.getLongitude());
+        //Añado icono al marcador de ubicacion obtenida
         Marker ubicacion = mMap.addMarker(new MarkerOptions().position(ubicacion_actual)
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.posicion)));
 
     }
     //Accedo a la ubicacion GPS
-    private void accederAlaUbicacionGPS () {
+    private void accederAlaUbicacionGPS ()
+    {
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         locationRequest = LocationRequest.create();
-        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);//quiero precisión alta
-        locationRequest.setInterval(5000);//cada 5 segundos, recibire una actualización
+        //Quiero precisión alta para ubicacion
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        //Cada 5 segundos, recibire una actualización de ubicacion
+        locationRequest.setInterval(5000);
 
         locationCallback = new LocationCallback() {
             @Override
             public void onLocationResult(@NonNull LocationResult locationResult) {
 
                 if (locationResult != null) {
-                    Location location = locationResult.getLastLocation();//obtengo la última ubicación
+                    //Obtengo la última ubicación
+                    Location location = locationResult.getLastLocation();
                     mostrarUbicacionObtenida(location);
-                    //una vez obtenida la ubicación, desactivo el bucle, la frecuncia de pedirla
+                    //Una vez obtenida la ubicación, desactivo el bucle, la frecuencia de pedirla
                     MapsActivity.this.fusedLocationProviderClient.removeLocationUpdates(MapsActivity.this.locationCallback);
                 }
             }
         };
-        //android studio nos obliga antes de llamar a obtener la ubicación, comprobar que el acceso por gps (permiso peligroso, está concedido)
+        //Android studio nos obliga antes de llamar a mostrarUbicacionObtenida, comprobar de nuevo que el acceso por gps (permiso peligroso, está concedido)
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, null);
         }
@@ -218,7 +225,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //Metodo deprecado pero funciona bien
         startActivityForResult(intent, 77);
     }
-    //Compruebo si hay acceso a la ubicacion y si no lo mando a que conecte el GPS
+    //Compruebo si hay acceso a la ubicacion y si no lo mando a que active el GPS
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -235,7 +242,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Toast.makeText(this, "Sin acceso a la ubicación", Toast.LENGTH_LONG).show();
         }
     }
-    //Compruebo si hay acceso a la ubicacion despues de mandarlo la primera vez a conectar GPS
+    //Compruebo si hay acceso a la ubicacion despues de mandarlo la primera vez a activar GPS
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

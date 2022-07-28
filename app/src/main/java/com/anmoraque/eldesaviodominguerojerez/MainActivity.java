@@ -116,7 +116,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         //No tiene ni whasap ni telegram
                         Toast.makeText(this, "Descárgate la APP", Toast.LENGTH_LONG).show();
                     }
-
                 }
                 break;
             case 5:
