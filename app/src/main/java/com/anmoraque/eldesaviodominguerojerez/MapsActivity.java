@@ -4,6 +4,7 @@ package com.anmoraque.eldesaviodominguerojerez;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
@@ -17,6 +18,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -37,6 +41,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.anmoraque.eldesaviodominguerojerez.databinding.ActivityMapsBinding;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -57,6 +62,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //Cuando el fused, tiene el dato, llama a éste, que es el callback
     private LocationCallback locationCallback;
 
+    private ImageView imagen_negocio;
+    private TextView textView_nombre_negocio;
+    private TextView textView_informacion_negocio;
+    private TextView textView_horario_negocio;
+    private TextView textView_direccion_negocio;
+    private CardView cardView;
+
     //Cargar el mapa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +82,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        imagen_negocio = findViewById(R.id.imagen_negocio_map);
+        textView_nombre_negocio = findViewById(R.id.nombre_negocio_map);
+        textView_informacion_negocio = findViewById(R.id.informacion_negocio_map);
+        textView_horario_negocio = findViewById(R.id.horario_negocio_map);
+        textView_direccion_negocio = findViewById(R.id.direccion_negocio_map);
+        cardView = findViewById(R.id.card_view_map);
+
+        //Escucho el GPS para saber ubicacion
         this.locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
     }
 
@@ -108,15 +128,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
-                //Mediante un Intent mando el enlace a Google maps del negocio_tocado
+
                 //Si num_negocio_tocado es el mismo que el tag del marcador
                 int num_negocio_tocado = (int) marker.getTag();
                 //Negocio_tocado es igual al negocio de la lista_negocios
                 Negocios negocio_tocado = MapsActivity.this.lista_negocios.get(num_negocio_tocado);
-                //Cojo el enlace a maps del Negocio_tocado
-                String url_maps = negocio_tocado.getEnlace_maps();
-                Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(url_maps));
-                startActivity(intent);
+
+                //Añado la informacion del negocio_tocado a la cardView
+                textView_nombre_negocio.setText(negocio_tocado.getNombre());
+                textView_informacion_negocio.setText(negocio_tocado.getInformacion());
+                textView_horario_negocio.setText(negocio_tocado.getHorario());
+                textView_direccion_negocio.setText(negocio_tocado.getDireccion());
+                //Necesito cargar la imagen del negocio URL y uso libreria Picasso
+                Picasso.get().load(negocio_tocado.getFoto()).into(imagen_negocio);
+
+                //Pongo visible la cardView
+                cardView.setVisibility(View.VISIBLE);
+                //Escucho el cardView
+                cardView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Cojo el enlace a maps del Negocio_tocado
+                        String url_maps = negocio_tocado.getEnlace_maps();
+                        //Mediante un Intent mando el enlace a Google maps del cardView tocado
+                        Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(url_maps));
+                        startActivity(intent);
+                    }
+                });
             }
         });
     }
