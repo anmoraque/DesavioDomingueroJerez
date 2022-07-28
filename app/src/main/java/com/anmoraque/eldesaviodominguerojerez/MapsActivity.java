@@ -154,6 +154,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         //Mediante un Intent mando el enlace a Google maps del cardView tocado
                         Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(url_maps));
                         startActivity(intent);
+                        //Pongo GONE la cardView
+                        cardView.setVisibility(View.GONE);
                     }
                 });
             }
