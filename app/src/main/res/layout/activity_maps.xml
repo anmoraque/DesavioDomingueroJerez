@@ -27,7 +27,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Click aquí para acceder a Google Maps"
+                android:text="Click para acceder a Google Maps"
                 android:textColor="@color/black"
                 android:gravity="center">
             </TextView>
