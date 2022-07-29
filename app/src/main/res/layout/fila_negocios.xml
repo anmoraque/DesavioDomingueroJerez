@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="180dp"
     android:background="@color/teal_200"
     android:orientation="vertical">
     <androidx.cardview.widget.CardView
@@ -9,16 +9,17 @@
         android:id="@+id/card_view"
         android:layout_gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="170dp"
         card_view:cardCornerRadius="6dp"
         android:layout_margin="4dp">
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:background="@color/fondo"
             android:orientation="vertical">
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
                 android:orientation="horizontal">
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -31,8 +32,8 @@
                     </ImageView>
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
                     android:orientation="vertical">
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -64,12 +65,12 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="70dp"
                 android:orientation="horizontal">
                 <LinearLayout
                     android:id="@+id/horario"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="70dp"
                     android:orientation="vertical">
                     <TextView
                         android:id="@+id/enunciado_horario"
@@ -83,7 +84,7 @@
                     <TextView
                         android:id="@+id/horario_negocio"
                         android:layout_width="100dp"
-                        android:layout_height="20dp"
+                        android:layout_height="30dp"
                         android:text="9:30 – 22:30"
                         android:textSize="14sp"
                         android:textColor="@color/black"
@@ -93,8 +94,8 @@
                 </LinearLayout>
                 <LinearLayout
                     android:id="@+id/enlace_maps"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
                     android:orientation="vertical">
                     <TextView
                         android:id="@+id/enunciado_direccion"
@@ -108,7 +109,7 @@
                     <TextView
                         android:id="@+id/direccion_negocio"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dp"
                         android:text="Urbanización, Calle Sevilla, 24"
                         android:textSize="14sp"
                         android:textColor="@color/black"

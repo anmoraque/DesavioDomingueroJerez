@@ -21,6 +21,7 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -68,7 +69,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private TextView textView_informacion_negocio;
     private TextView textView_horario_negocio;
     private TextView textView_direccion_negocio;
-    private CardView cardView;
+    private LinearLayout cardView;
 
     //Cargar el mapa
     @Override
@@ -116,7 +117,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 LatLng n = new LatLng (negocios.getLatitude(), negocios.getLongitude());
                 //Añado el titulo, descripcion e icono al marcador
                 Marker marcador = mMap.addMarker(new MarkerOptions().position(n).title(negocios.getNombre())
-                        .snippet(negocios.getDireccion()).icon(BitmapDescriptorFactory.fromResource(R.drawable.tienda)));
+                        .snippet("Click aquí para más detalles").icon(BitmapDescriptorFactory.fromResource(R.drawable.tienda)));
                 //Pongo el num_negocio al Tag del marcador
                 marcador.setTag(num_negocio);
                 //Hago zoom para ver mas cerca el marcador centro_jerez

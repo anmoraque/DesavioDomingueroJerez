@@ -10,7 +10,7 @@ public class PantallaAyudaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ayuda_ajustes);
+        setContentView(R.layout.activity_pantalla_ayuda);
 
         //Boton de ir atras
         getSupportActionBar().setDisplayShowTitleEnabled(true);
