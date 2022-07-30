@@ -13,7 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.anmoraque.eldesaviodominguerojerez.model.ObtenerDatos;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -121,6 +120,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     } else {
                         //No tiene ni whasap ni telegram
                         Toast.makeText(this, "Descárgate la APP", Toast.LENGTH_LONG).show();
+
                     }
                 }
                 break;
