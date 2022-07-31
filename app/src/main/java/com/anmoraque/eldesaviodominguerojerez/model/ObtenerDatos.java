@@ -18,6 +18,10 @@ import com.anmoraque.eldesaviodominguerojerez.MapsActivity;
 import com.google.gson.reflect.TypeToken;
 import com.anmoraque.eldesaviodominguerojerez.PantallaNegociosActivity;
 import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.io.IOException;
@@ -31,7 +35,7 @@ import java.net.URL;
 //List<Negocios>> tipo de dato devuelto
 public class ObtenerDatos extends AsyncTask<Void, Void, List<Negocios>> {
     //Web del servidor de la lista en este caso en Github
-    private static final String URL_NEGOCIOS = "https://my-json-server.typicode.com/anmoraque/basedatosdesavio/negocios/";
+    private static final String URL_NEGOCIOS = "https://anmoraque.github.io/Data/datos.json";
     //PantallaActivity donde necesito obtenerDatos
     private Context actividad_llamante;
     //Metodo para obtener los datos
@@ -72,6 +76,7 @@ public class ObtenerDatos extends AsyncTask<Void, Void, List<Negocios>> {
                 Log.d("ETIQUETA_LOG", "TIPO MIME " +httpURLConnection.getContentType() );
                 inputStreamReader = new InputStreamReader(httpURLConnection.getInputStream());
                 //Para pasar el cuerpo de JSON a la lista de negocios
+                //Obtenemos el JSON global
                 gson = new Gson();
                 //Pasar el tipo lista a Negocios
                 Type listType = new TypeToken<ArrayList<Negocios>>(){}.getType();

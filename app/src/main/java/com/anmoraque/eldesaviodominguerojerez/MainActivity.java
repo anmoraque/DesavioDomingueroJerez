@@ -7,6 +7,9 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -14,6 +17,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+
+import java.io.UnsupportedEncodingException;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -97,32 +102,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             //Compartir
             case 4:
-                //Comparto por whasap o si no tiene por Telegram
-                Intent intent_compartir = new Intent(Intent.ACTION_SEND);
-                String texto_compartir = "Descárgate la APP";
-                texto_compartir = texto_compartir + " " + RUTA_TIENDA;
-                intent_compartir.putExtra(Intent.EXTRA_TEXT, texto_compartir);
-                //Tipo de dato que quiero compartir TIPO MIME
-                intent_compartir.setType("text/plain");
-                intent_compartir.setPackage("com.whatsapp");
-
-                if (intent_compartir.resolveActivity(getPackageManager()) != null)
-                {
-                    //Tiene whatsapp
+                //Comparto por whatsapp
+                try {
+                    String texto_compartir = "Descárgate la APP";
+                    texto_compartir = texto_compartir + " " + RUTA_TIENDA;
+                    Intent intent_compartir = new Intent();
+                    intent_compartir.setAction(Intent.ACTION_SEND);
+                    intent_compartir.putExtra(Intent.EXTRA_TEXT, texto_compartir);
+                    intent_compartir.setType("text/plain");
+                    intent_compartir.setPackage("com.whatsapp");
                     startActivity(intent_compartir);
-                }else {
-
-                    //Tiene telegram
-                    intent_compartir.setPackage("org.telegram.messenger");
-                    if (intent_compartir.resolveActivity(getPackageManager()) != null)
-                    {
-                        startActivity(intent_compartir);
-                    } else {
-                        //No tiene ni whasap ni telegram
-                        Toast.makeText(this, "Descárgate la APP", Toast.LENGTH_LONG).show();
-
+                } catch (Exception e){
+                    //Si no tiene Whatsapp
+                    Toast.makeText(this, "No tienes Whatsapp instalado", Toast.LENGTH_LONG).show();
                     }
-                }
                 break;
             //Creditos
             case 5:
