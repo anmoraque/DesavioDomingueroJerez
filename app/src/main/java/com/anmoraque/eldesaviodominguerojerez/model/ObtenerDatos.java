@@ -18,7 +18,6 @@ import com.anmoraque.eldesaviodominguerojerez.MapsActivity;
 import com.google.gson.reflect.TypeToken;
 import com.anmoraque.eldesaviodominguerojerez.PantallaNegociosActivity;
 import com.google.gson.Gson;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.io.IOException;
