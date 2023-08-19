@@ -6,9 +6,12 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -63,16 +66,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         {
             case android.R.id.home :
                 Log.d("ETIQUETA_LOG", "Hamburguesa tocada");
-                if (menu_visible)
-                {
-                    //Ocultar el menu
-                    drawerLayout.closeDrawers();
-                    menu_visible =false;
-                } else
-                {
-                    //Mostrar el menú
-                    drawerLayout.openDrawer(GravityCompat.START);//se abre de derecha izquieras
-                    menu_visible =true;
+                ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+                if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
+                    // Hay conexión a Internet, puedes acceder a recursos en línea
+                    if (menu_visible)
+                    {
+                        //Ocultar el menu
+                        drawerLayout.closeDrawers();
+                        menu_visible =false;
+                    } else
+                    {
+                        //Mostrar el menú
+                        drawerLayout.openDrawer(GravityCompat.START);//se abre de derecha izquieras
+                        menu_visible =true;
+                    }
+                } else {
+                    // No hay conexión a Internet, muestra un mensaje al usuario
+                    Toast.makeText(this, "No tienes conexión a internet", Toast.LENGTH_LONG).show();
                 }
                 break;
         }
@@ -126,10 +137,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     //Linear para ir directo a Distritos
     public void IrADistritos(View view) {
-        saltaActividad(PantallaDistritosActivity.class);
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
+            // Hay conexión a Internet, puedes acceder a recursos en línea
+            saltaActividad(PantallaDistritosActivity.class);
+        } else {
+            // No hay conexión a Internet, muestra un mensaje al usuario
+            Toast.makeText(this, "No tienes conexión a internet", Toast.LENGTH_LONG).show();
+        }
     }
     //Linear para ir directamente a Mapas
     public void IrAMapas(View view) {
-        saltaActividad(MapsActivity.class);
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
+            // Hay conexión a Internet, puedes acceder a recursos en línea
+            saltaActividad(MapsActivity.class);
+        } else {
+            // No hay conexión a Internet, muestra un mensaje al usuario
+            Toast.makeText(this, "No tienes conexión a internet", Toast.LENGTH_LONG).show();
+        }
     }
 }
