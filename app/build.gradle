@@ -5,14 +5,14 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.anmoraque.eldesaviodominguerojerez"
         minSdk 21
         targetSdk 32
-        versionCode 1
-        versionName "1.0"
+        versionCode 102
+        versionName "2.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -31,6 +31,8 @@ android {
     buildFeatures {
         viewBinding true
     }
+    namespace 'com.anmoraque.eldesaviodominguerojerez'
+    buildToolsVersion '34.0.0'
 }
 
 

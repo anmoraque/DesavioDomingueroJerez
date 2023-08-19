@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.anmoraque.eldesaviodominguerojerez">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -32,7 +31,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyC9bQSZr_uUF_EoojHqajpmfpxf_7MCqts" />
+            android:value="AIzaSyAOOJn6EEDunw7v56wVLP9yCU1qbTBsoB4" />
 
         <activity
             android:name=".MapsActivity"
