@@ -10,9 +10,9 @@ android {
     defaultConfig {
         applicationId "com.anmoraque.eldesaviodominguerojerez"
         minSdk 21
-        targetSdk 32
-        versionCode 104
-        versionName "2.1"
+        targetSdk 34
+        versionCode 105
+        versionName "2.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
