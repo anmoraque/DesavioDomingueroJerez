@@ -11,8 +11,8 @@ android {
         applicationId "com.anmoraque.eldesaviodominguerojerez"
         minSdk 21
         targetSdk 34
-        versionCode 106
-        versionName "2.2"
+        versionCode 107
+        versionName "2.3"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
