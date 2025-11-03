@@ -1,162 +1,137 @@
 package com.anmoraque.eldesaviodominguerojerez;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.Bundle;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.net.Uri;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
-
+import com.anmoraque.eldesaviodominguerojerez.databinding.ActivityMainBinding;
 import com.google.android.material.navigation.NavigationView;
 
-import java.io.UnsupportedEncodingException;
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+    private ActivityMainBinding binding;
+    private boolean menuVisible;
+    // MODIFICADO: RUTA_TIENDA es una constante, no un string de UI, pero puede ser bueno externalizarlo
+    // Si la ruta no cambia, se puede dejar aquí. Si es necesaria la traducción/variación, externalizarla en strings.xml
+    private static final String RUTA_TIENDA = "https://play.google.com/store/apps/details?id=com.anmoraque.eldesaviodominguerojerez";
 
-    private DrawerLayout drawerLayout;
-    private NavigationView navigationView;
-    private boolean menu_visible;
-    private final static String RUTA_TIENDA = "https://play.google.com/store/apps/details?id=com.anmoraque.eldesaviodominguerojerez";
-
-    //Crea la actividad principal (savedInstanceState inicia menú lateral)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        //Forzar a no usar el tema night
+        // ViewBinding
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        // Compatibilidad con WindowInsets (Android 14+)
+        getWindow().setDecorFitsSystemWindows(true);
+
+        // Forzar modo claro
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-        //Boton de el menu
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //Con esta instrucción personalizo el icono del menú que abre
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24);
-        //Envoltorio menú "animado"
-        this.drawerLayout = findViewById(R.id.drawer);
-        //El propio menú lateral
-        this.navigationView = findViewById(R.id.navview);
-        //Escuchando el menu
-        this.navigationView.setNavigationItemSelectedListener(this);
+        // Configurar Toolbar como ActionBar
+        setSupportActionBar(binding.toolbar);
 
+        // Configurar icono del Drawer
+        binding.toolbar.setNavigationIcon(R.drawable.ic_baseline_menu_24);
+        binding.toolbar.setNavigationOnClickListener(v -> toggleDrawer());
+
+        // Configurar Navigation Drawer
+        binding.navview.setNavigationItemSelectedListener(this);
     }
 
-    //Metodo global para cambiar de actividad mediante Intent
-    private void saltaActividad(Class actividad_destino) {
-        Intent intent = new Intent(this, actividad_destino);
-        startActivity(intent);
-    }
-
-    //Cuando tocas el icono del menú lo abres
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        //Toca el icono del menú
-        switch (item.getItemId())
-        {
-            case android.R.id.home :
-                Log.d("ETIQUETA_LOG", "Hamburguesa tocada");
-                ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-                NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-                if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
-                    // Hay conexión a Internet, puedes acceder a recursos en línea
-                    if (menu_visible)
-                    {
-                        //Ocultar el menu
-                        drawerLayout.closeDrawers();
-                        menu_visible =false;
-                    } else
-                    {
-                        //Mostrar el menú
-                        drawerLayout.openDrawer(GravityCompat.START);//se abre de derecha izquieras
-                        menu_visible =true;
-                    }
-                } else {
-                    // No hay conexión a Internet, muestra un mensaje al usuario
-                    Toast.makeText(this, "No tienes conexión a internet", Toast.LENGTH_LONG).show();
-                }
-                break;
+    /** Alterna apertura/cierre del Drawer */
+    private void toggleDrawer() {
+        if (!hayConexionInternet()) {
+            // MODIFICADO: Usar string resource para el Toast
+            Toast.makeText(this, R.string.toast_no_internet, Toast.LENGTH_LONG).show();
+            return;
         }
-        return super.onOptionsItemSelected(item);
+
+        if (menuVisible) {
+            binding.drawer.closeDrawer(GravityCompat.START);
+        } else {
+            binding.drawer.openDrawer(GravityCompat.START);
+        }
+        menuVisible = !menuVisible;
     }
 
-    //Cuando tocas una opción del menú recibes el callback
+    /** Maneja selección de items del menú lateral usando IDs modernos */
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getOrder())
-        {
-            //Buscador por mapa
-            case 0:
+    public boolean onNavigationItemSelected(@NonNull android.view.MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.nav_maps:
                 saltaActividad(MapsActivity.class);
                 break;
-            //Buscador por distritos
-            case 1:
+            case R.id.nav_distritos:
                 saltaActividad(PantallaDistritosActivity.class);
                 break;
-            //Adjuntar negocio nuevo
-            case 2:
+            case R.id.nav_agregar_negocio:
                 saltaActividad(AdjuntarNuevoNegocioUsuarioActivity.class);
                 break;
-            //Ayuda sobre la App
-            case 3:
+            case R.id.nav_ayuda:
                 saltaActividad(PantallaAyudaActivity.class);
                 break;
-            //Compartir
-            case 4:
-                //Comparto por whatsapp
-                try {
-                    String texto_compartir = "Descárgate la APP";
-                    texto_compartir = texto_compartir + " " + RUTA_TIENDA;
-                    Intent intent_compartir = new Intent();
-                    intent_compartir.setAction(Intent.ACTION_SEND);
-                    intent_compartir.putExtra(Intent.EXTRA_TEXT, texto_compartir);
-                    intent_compartir.setType("text/plain");
-                    intent_compartir.setPackage("com.whatsapp");
-                    startActivity(intent_compartir);
-                } catch (Exception e){
-                    //Si no tiene Whatsapp
-                    Toast.makeText(this, "No tienes Whatsapp instalado", Toast.LENGTH_LONG).show();
-                    }
+            case R.id.nav_compartir:
+                compartirApp();
                 break;
-            //Creditos
-            case 5:
+            case R.id.nav_creditos:
                 saltaActividad(PantallaCreditosActivity.class);
                 break;
         }
-        return false;
+
+        binding.drawer.closeDrawer(GravityCompat.START);
+        menuVisible = false;
+        return true;
     }
-    //Linear para ir directo a Distritos
-    public void IrADistritos(View view) {
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
-            // Hay conexión a Internet, puedes acceder a recursos en línea
-            saltaActividad(PantallaDistritosActivity.class);
-        } else {
-            // No hay conexión a Internet, muestra un mensaje al usuario
-            Toast.makeText(this, "No tienes conexión a internet", Toast.LENGTH_LONG).show();
+
+    /** Método global para iniciar otra actividad */
+    private void saltaActividad(Class<?> actividadDestino) {
+        startActivity(new Intent(this, actividadDestino));
+    }
+
+    /** Compartir app vía WhatsApp */
+    private void compartirApp() {
+        try {
+            // MODIFICADO: Usar string resource para el texto a compartir
+            String textoCompartir = getString(R.string.share_app_text) + " " + RUTA_TIENDA;
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.putExtra(Intent.EXTRA_TEXT, textoCompartir);
+            intent.setType("text/plain");
+            intent.setPackage("com.whatsapp");
+            startActivity(intent);
+        } catch (Exception e) {
+            // MODIFICADO: Usar string resource para el Toast de error
+            Toast.makeText(this, R.string.toast_whatsapp_not_installed, Toast.LENGTH_LONG).show();
         }
     }
-    //Linear para ir directamente a Mapas
-    public void IrAMapas(View view) {
+
+    /** Botón directo a Distritos */
+    public void IrADistritos(android.view.View view) {
+        if (hayConexionInternet()) saltaActividad(PantallaDistritosActivity.class);
+            // MODIFICADO: Usar string resource para el Toast
+        else Toast.makeText(this, R.string.toast_no_internet, Toast.LENGTH_LONG).show();
+    }
+
+    /** Botón directo a Mapas */
+    public void IrAMapas(android.view.View view) {
+        if (hayConexionInternet()) saltaActividad(MapsActivity.class);
+            // MODIFICADO: Usar string resource para el Toast
+        else Toast.makeText(this, R.string.toast_no_internet, Toast.LENGTH_LONG).show();
+    }
+
+    /** Verifica si hay conexión a Internet */
+    private boolean hayConexionInternet() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
-            // Hay conexión a Internet, puedes acceder a recursos en línea
-            saltaActividad(MapsActivity.class);
-        } else {
-            // No hay conexión a Internet, muestra un mensaje al usuario
-            Toast.makeText(this, "No tienes conexión a internet", Toast.LENGTH_LONG).show();
-        }
+        return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
     }
 }

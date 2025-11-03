@@ -1,13 +1,14 @@
 package com.anmoraque.eldesaviodominguerojerez;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.MenuItem;
 import android.os.Bundle;
+import android.view.MenuItem;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.anmoraque.eldesaviodominguerojerez.adapter.AdapterListaDistritos;
+import com.anmoraque.eldesaviodominguerojerez.databinding.ActivityPantallaDistritosBinding;
 import com.anmoraque.eldesaviodominguerojerez.model.Distritos;
 
 import java.util.ArrayList;
@@ -15,54 +16,50 @@ import java.util.List;
 
 public class PantallaDistritosActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerViewDistritos;
+    private ActivityPantallaDistritosBinding binding;
     private AdapterListaDistritos adapterListaDistritos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pantalla_distritos);
 
-        //Boton de ir atras
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        // ViewBinding
+        binding = ActivityPantallaDistritosBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        //Creo la lista Distritos
-        List<Distritos> lista_distritos = new ArrayList<>();
-
-                                            //int id, String nombre, String informacion
-        Distritos distrito1 = new Distritos(0, "Norte", "Plaza del Caballo, Álvaro Domecq, San Joaquín, Torres de Córdoba, El Almendral, Montealto, El Altillo, Las Flores, El Bosque, Parque González Hontoria, Zona Hipercor, Jacaranda.");
-        Distritos distrito2 = new Distritos(1, "Oeste", "Picadueña, San Valentín, Las Torres, Sagrada Familia, La Plata, La Coronación, Icovesa, Juan XXIII, Los Naranjos, El Calvario, Polígono San Benito,  Avd. de la Cruz Roja, La Unión.");
-        Distritos distrito3 = new Distritos(2, "Centro", "San Mateo, San Dionisio, Catedral, Divina Pastora, La Constancia, San Pedro, Pío XII, Vallesequillo, Calle Porvenir, Plaza de las Angustias, Calle Corredera, Madre de Dios, Santiago.");
-        Distritos distrito4 = new Distritos(3, "Sur", "Estancia Barrera, Vista Alegre, Torresoto, Hijuela de las Coles, Federico Mayo, San Telmo, Liberación, El Portal, Blas Infante, Santo Tomás de Aquino, Puertas del Sur, Torres del Sur.");
-        Distritos distrito5 = new Distritos(4, "Noroeste", "El Pelirón, Torresblancas, San José Obrero, La Granja, San Enrique, Los Pinos, Chapín, La Marquesa, Jerez Norte, La Cañada, Avd. Lola Flores, Santa Teresa, Avd. Europa.");
-        Distritos distrito6 = new Distritos(5, "Este", "La Vid, Zafer, La Asunción, Olivar de Rivero, El Retiro, Princijerez, Nueva Andalucía, Montealegre, Pago San José, Parque Atlántico, La Canaleja, La Pita, La Milagrosa, Villa del Este.");
-
-        lista_distritos.add(distrito1);
-        lista_distritos.add(distrito2);
-        lista_distritos.add(distrito3);
-        lista_distritos.add(distrito4);
-        lista_distritos.add(distrito5);
-        lista_distritos.add(distrito6);
-
-
-        //Añado la lista al adapter que a su vez lo coloca en el recycler
-        this.recyclerViewDistritos = findViewById(R.id.recicler_distritos);
-        this.adapterListaDistritos = new AdapterListaDistritos(lista_distritos);
-        this.recyclerViewDistritos.setAdapter(this.adapterListaDistritos);
-
-        //Defino el estilo de la lista / la distribución
-        RecyclerView.LayoutManager layoutManager =  new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        this.recyclerViewDistritos.setLayoutManager(layoutManager);
-
+        // Toolbar
+        Toolbar toolbar = new Toolbar(this);
+        // MODIFICADO: Usar string resource para el título
+        toolbar.setTitle(R.string.toolbar_title_districts);
+        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
+        setSupportActionBar(binding.toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-    //Metodo para la accion del boton de ir atras
+        // Crear lista de Distritos
+        List<Distritos> listaDistritos = new ArrayList<>();
+        // MODIFICADO: Usar string resources para nombres y descripciones de distritos
+        listaDistritos.add(new Distritos(0, getString(R.string.district_name_north), getString(R.string.district_desc_north)));
+        listaDistritos.add(new Distritos(1, getString(R.string.district_name_west), getString(R.string.district_desc_west)));
+        listaDistritos.add(new Distritos(2, getString(R.string.district_name_center), getString(R.string.district_desc_center)));
+        listaDistritos.add(new Distritos(3, getString(R.string.district_name_south), getString(R.string.district_desc_south)));
+        listaDistritos.add(new Distritos(4, getString(R.string.district_name_northwest), getString(R.string.district_desc_northwest)));
+        listaDistritos.add(new Distritos(5, getString(R.string.district_name_east), getString(R.string.district_desc_east)));
+
+        // Configurar Adapter y RecyclerView
+        adapterListaDistritos = new AdapterListaDistritos(listaDistritos);
+        binding.reciclerDistritos.setAdapter(adapterListaDistritos);
+        binding.reciclerDistritos.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    // Acción del botón de ir atrás
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId()==android.R.id.home) {
+        if (item.getItemId() == android.R.id.home) {
             finish();
+            return true;
         }
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 }

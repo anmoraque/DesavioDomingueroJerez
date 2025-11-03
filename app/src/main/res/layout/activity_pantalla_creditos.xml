@@ -1,150 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/fondo"
-    tools:context=".PantallaCreditosActivity">
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:background="@color/md_theme_light_background"
+    android:fitsSystemWindows="true">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="88dp"
-        android:text="Autor de la APP"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar_creditos"
+        style="@style/Widget.Material3.Toolbar"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2">
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimaryContainer"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:titleCentered="true"
+        app:titleTextColor="?attr/colorSurface" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/foto_autor"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/foto_al"
-            app:civ_border_color="@color/teal_200"
-            app:civ_border_width="2dp" />
-
-        <TextView
-            android:id="@+id/nombre_autor"
-            android:layout_width="160dp"
-            android:layout_height="50dp"
-            android:gravity="left|center_vertical"
-            android:paddingLeft="5dp"
-            android:text="Alberto Morales"
-            android:textColor="@color/purple_500"
-            android:textSize="20sp"></TextView>
-
-        <ImageView
-            android:id="@+id/logo_linkedin"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:padding="5dp"
-            android:src="@drawable/linkedin"></ImageView>
-
-        <ImageView
-            android:id="@+id/logo_github"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:padding="5dp"
-            android:src="@drawable/logogithub"></ImageView>
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/descripcion_creditos"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="La aplicación ha sido desarrollada como práctica después de un curso de Android promovido por el Servicio Estatal de Empleo Español. La aplicación no obtiene nigún dato personal del usuario. Esta exenta de cualquier garantía. Para cualquier sugerencia o comentario contacte con el autor. Espero que el trabajo invertido le sea de utilidad, gracias por utilizarla."
-        android:textAlignment="center"
-        android:textColor="@color/purple_500"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"></TextView>
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize">
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="180dp"
-        android:layout_height="180dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/descripcion_creditos"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:srcCompat="@drawable/logo" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Colaboradora en el diseño"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/credits_title_author"
+                android:textColor="?attr/colorOnBackground"
+                android:textSize="20sp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3">
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                app:layout_constraintTop_toBottomOf="@id/textView2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/foto_colaboradora"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/foto_pa"
-            app:civ_border_color="@color/teal_200"
-            app:civ_border_width="2dp" />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/foto_autor"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/foto_al"
+                    app:civ_border_color="?attr/colorPrimaryContainer"
+                    app:civ_border_width="2dp"
+                    android:contentDescription="@string/content_description_author_photo"/>
 
-        <TextView
-            android:id="@+id/nombre_colaboradora"
-            android:layout_width="260dp"
-            android:layout_height="50dp"
-            android:gravity="left|center_vertical"
-            android:paddingLeft="5dp"
-            android:text="Patricia Guerrero"
-            android:textColor="@color/purple_500"
-            android:textSize="20sp"></TextView>
+                <TextView
+                    android:id="@+id/nombre_autor"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="start|center_vertical"
+                    android:paddingStart="8dp"
+                    android:text="@string/credits_author_name"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="20sp"/>
 
-    </LinearLayout>
+                <ImageView
+                    android:id="@+id/logo_linkedin"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:padding="5dp"
+                    android:src="@drawable/linkedin"
+                    android:contentDescription="@string/content_description_linkedin_logo"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+                <ImageView
+                    android:id="@+id/logo_github"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:padding="5dp"
+                    android:src="@drawable/logogithub"
+                    android:contentDescription="@string/content_description_github_logo"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/credits_title_collaborator"
+                android:textColor="?attr/colorOnBackground"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@id/linearLayout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                app:layout_constraintTop_toBottomOf="@id/textView3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/foto_colaboradora"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/foto_pa"
+                    app:civ_border_color="?attr/colorPrimaryContainer"
+                    app:civ_border_width="2dp"
+                    android:contentDescription="@string/content_description_collaborator_photo"/>
+
+                <TextView
+                    android:id="@+id/nombre_colaboradora"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="start|center_vertical"
+                    android:paddingStart="8dp"
+                    android:text="@string/credits_collaborator_name"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="32dp"
+                app:layout_constraintTop_toBottomOf="@id/linearLayout2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:src="@drawable/logo"
+                android:contentDescription="@string/content_description_app_logo"/>
+
+            <TextView
+                android:id="@+id/descripcion_creditos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="@string/credits_description"
+                android:textAlignment="center"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="14sp"
+                app:layout_constraintTop_toBottomOf="@id/imageView3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

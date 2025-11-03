@@ -1,38 +1,52 @@
 package com.anmoraque.eldesaviodominguerojerez.model;
 
+import androidx.annotation.NonNull;
+
 public class Distritos {
 
-    private int id;
+    private final int id;
+    @NonNull
     private String nombre;
+    @NonNull
     private String informacion;
 
-    public Distritos(int id, String nombre, String informacion) {
-
+    public Distritos(int id, @NonNull String nombre, @NonNull String informacion) {
         this.id = id;
         this.nombre = nombre;
         this.informacion = informacion;
     }
 
-    public String getNombre() { return this.nombre; }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getInformacion() {
-        return this.informacion;
-    }
-
-    public void setInformacion(String informacion) {
-        this.informacion = informacion;
-    }
-
+    // Getters
     public int getId() {
-        return this.id;
+        return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    @NonNull
+    public String getNombre() {
+        return nombre;
     }
 
+    @NonNull
+    public String getInformacion() {
+        return informacion;
+    }
+
+    // Setters para campos mutables
+    public void setNombre(@NonNull String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setInformacion(@NonNull String informacion) {
+        this.informacion = informacion;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "Distritos{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", informacion='" + informacion + '\'' +
+                '}';
+    }
 }

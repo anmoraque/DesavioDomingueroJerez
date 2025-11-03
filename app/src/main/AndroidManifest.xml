@@ -1,11 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Permisos de red y ubicación -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
+    <!-- Permiso opcional para mapas con ubicación precisa -->
+    <uses-feature android:name="android.hardware.location.gps" android:required="false" />
+
+    <!-- Declarar visibilidad si se abre contenido en otras apps (Android 11+) -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="geo" />
+        </intent>
+    </queries>
 
     <application
         android:allowBackup="true"
@@ -16,57 +27,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ElDesavioDomingueroJerez"
-        tools:targetApi="31">
+        tools:targetApi="34">
 
-        <!--
-             TODO: Before you run your application, you need a Google Maps API key.
-
-             To get one, follow the directions here:
-
-                https://developers.google.com/maps/documentation/android-sdk/get-api-key
-
-             Once you have your API key (it starts with "AIza"), define a new property in your
-             project's local.properties file (e.g. MAPS_API_KEY=Aiza...), and replace the
-             "YOUR_API_KEY" string in this file with "${MAPS_API_KEY}".
-        -->
+        <!-- Clave API de Google Maps gestionada con manifestPlaceholders -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAOOJn6EEDunw7v56wVLP9yCU1qbTBsoB4" />
+            android:value="${MAPS_API_KEY}" />
 
-        <activity
-            android:name=".MapsActivity"
-            android:exported="false"
-            android:label="@string/title_activity_maps" />
-        <activity
-            android:name=".PantallaNegociosActivity"
-            android:configChanges="orientation|screenSize|keyboard"
-            android:exported="false"
-            android:label="Negocios del Distrito"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".PantallaAyudaActivity"
-            android:configChanges="orientation|screenSize|keyboard"
-            android:exported="false"
-            android:label="Ayuda sobre la App"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".PantallaCreditosActivity"
-            android:configChanges="orientation|screenSize|keyboard"
-            android:exported="false"
-            android:label="Creditos"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".PantallaDistritosActivity"
-            android:configChanges="orientation|screenSize|keyboard"
-            android:exported="false"
-            android:label="Distritos de Jerez de la Frontera"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".AdjuntarNuevoNegocioUsuarioActivity"
-            android:configChanges="orientation|screenSize|keyboard"
-            android:exported="false"
-            android:label="Adjuntar nuevo negocio"
-            android:screenOrientation="portrait" />
+        <!-- Actividad principal (Launcher) -->
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|screenSize|keyboard"
@@ -74,10 +42,51 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Otras actividades de la app -->
+        <activity
+            android:name=".MapsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_maps" />
+
+        <activity
+            android:name=".PantallaNegociosActivity"
+            android:configChanges="orientation|screenSize|keyboard"
+            android:exported="false"
+            android:label="@string/title_select_business"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".PantallaAyudaActivity"
+            android:configChanges="orientation|screenSize|keyboard"
+            android:exported="false"
+            android:label="@string/toolbar_title_help"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".PantallaCreditosActivity"
+            android:configChanges="orientation|screenSize|keyboard"
+            android:exported="false"
+            android:label="@string/toolbar_title_credits"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".PantallaDistritosActivity"
+            android:configChanges="orientation|screenSize|keyboard"
+            android:exported="false"
+            android:label="@string/toolbar_title_districts"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".AdjuntarNuevoNegocioUsuarioActivity"
+            android:configChanges="orientation|screenSize|keyboard"
+            android:exported="false"
+            android:label="@string/toolbar_title_add_business"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

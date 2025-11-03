@@ -1,122 +1,74 @@
 package com.anmoraque.eldesaviodominguerojerez.model;
 
-
-//AsyncTask
-//En el interior de esta clase, se va a producir la comunicación
-//HTTP con el servidor
-
 import android.content.Context;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.util.Log;
 
-import androidx.annotation.RequiresApi;
-
-import java.lang.reflect.Type;
+import androidx.annotation.Nullable;
 
 import com.anmoraque.eldesaviodominguerojerez.MapsActivity;
-import com.google.gson.reflect.TypeToken;
 import com.anmoraque.eldesaviodominguerojerez.PantallaNegociosActivity;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
-
-//VOID - paramétro de entrada
-//VOID - no voy a contabilizar el avance no uso ningún número
-//List<Negocios>> tipo de dato devuelto
 public class ObtenerDatos extends AsyncTask<Void, Void, List<Negocios>> {
-    //Web del servidor de la lista en este caso en Github
+
     private static final String URL_NEGOCIOS = "https://anmoraque.github.io/Data/datos.json";
-    //PantallaActivity donde necesito obtenerDatos
-    private Context actividad_llamante;
-    //Metodo para obtener los datos
-    public ObtenerDatos(Context context)
-    {
-        this.actividad_llamante = context;
+    private final Context actividadLlamante;
+
+    public ObtenerDatos(Context context) {
+        this.actividadLlamante = context;
     }
 
-    //En este método, se lleva a cabo la comunicación HTTP
     @Override
-    protected List<Negocios> doInBackground(Void... vacio) {
-        //Lista vacia
-        List<Negocios> lista_negocios = null;
-        //Aquí vamos a poner la ruta
-        URL url = null;
-        //Esta clase representa el mensajes / la comunicación http
-        HttpURLConnection httpURLConnection = null;
-        //Este objeto me ayuda a (des)serializar JSON a JAVA
-        Gson gson = null;
-        //Leo el cuerpo del mensaje
-        InputStreamReader inputStreamReader = null;
+    protected List<Negocios> doInBackground(Void... voids) {
+        List<Negocios> listaNegocios = new ArrayList<>();
+        HttpURLConnection connection = null;
+        InputStreamReader reader = null;
+
         try {
-            //El proceso de comunicación es susceptible de lanzar una execepción
-            //por eso, vamos a agruparlo en un try-catch
-            url = new URL(URL_NEGOCIOS);
-            Log.d("ETIQUETA_LOG", "URL búsqueda url = " + url);
-            //Porque sé que el tipo de conexión es HTTP
-            httpURLConnection = (HttpURLConnection) url.openConnection();
-            //Consultar, obtener info del servidor, no envío nada (el cuerpo de la petición ,va vacío)
-            httpURLConnection.setRequestMethod("GET");
-            //HTTP_OK es 200 conexion bien
-            if (httpURLConnection.getResponseCode() == HttpURLConnection.HTTP_OK)
-            {
-                Log.d("ETIQUETA_LOG", "La conexión ha ido bien! - Respuesta OK");
-                //Accedo al cuerpo de la respuesta httpURLConnection.getInputStream()
-                //Uso la clase InputStream para leer ese cuerpo
-                Log.d("ETIQUETA_LOG", "Obtenidos " +httpURLConnection.getContentLength() + " bytes" );
-                Log.d("ETIQUETA_LOG", "TIPO MIME " +httpURLConnection.getContentType() );
-                inputStreamReader = new InputStreamReader(httpURLConnection.getInputStream());
-                //Para pasar el cuerpo de JSON a la lista de negocios
-                //Obtenemos el JSON global
-                gson = new Gson();
-                //Pasar el tipo lista a Negocios
-                Type listType = new TypeToken<ArrayList<Negocios>>(){}.getType();
-                lista_negocios = gson.fromJson(inputStreamReader, listType);
+            URL url = new URL(URL_NEGOCIOS);
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
 
+            if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                reader = new InputStreamReader(connection.getInputStream());
+                Type listType = new TypeToken<ArrayList<Negocios>>() {}.getType();
+                listaNegocios = new Gson().fromJson(reader, listType);
+                Log.d("ObtenerDatos", "Datos obtenidos: " + listaNegocios.size() + " negocios");
+            } else {
+                Log.e("ObtenerDatos", "Error HTTP: " + connection.getResponseCode());
             }
-        //Si va mal
+
         } catch (Exception e) {
-            Log.e("ETIQUETA_LOG", "Algo ha salido mal", e);
-        //Vaya bien o mal finalizo recursos
+            Log.e("ObtenerDatos", "Error al obtener datos", e);
         } finally {
-            //Liberar recursos
-            try {
-                inputStreamReader.close();
-
-            } catch (IOException e) {
-                e.printStackTrace();
+            if (reader != null) {
+                try { reader.close(); } catch (IOException ignored) {}
             }
-            httpURLConnection.disconnect();
-
+            if (connection != null) {
+                connection.disconnect();
+            }
         }
 
-        return lista_negocios;
+        return listaNegocios;
     }
 
-    //Este otro método, es invocado, al finalizar la conexión
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
-    protected void onPostExecute(List<Negocios> resultadoListaNegocios)
-    {
-        Log.d("ETIQUETA_LOG", "en onPostExecute ... comunicación terminada");
-        //¿Cómo le aviso a la Activity que he acabado?
-        //Segun necesite PantallaNegociosActivity o MapsActivity llevo el resultado mediante if
-        if (this.actividad_llamante instanceof PantallaNegociosActivity)
-        {
-            PantallaNegociosActivity actividad_negocios = ((PantallaNegociosActivity) this.actividad_llamante);
-            actividad_negocios.mostrarResultados(resultadoListaNegocios);
-
-        } if (this.actividad_llamante instanceof MapsActivity)
-            {
-                MapsActivity actividad_negocios_mapa = ((MapsActivity) this.actividad_llamante);
-                actividad_negocios_mapa.mostrarResultados(resultadoListaNegocios);
-            }
-
+    protected void onPostExecute(@Nullable List<Negocios> resultado) {
+        Log.d("ObtenerDatos", "onPostExecute: comunicación terminada");
+        if (actividadLlamante instanceof PantallaNegociosActivity) {
+            ((PantallaNegociosActivity) actividadLlamante).mostrarResultados(resultado);
+        } else if (actividadLlamante instanceof MapsActivity) {
+            ((MapsActivity) actividadLlamante).mostrarResultados(resultado);
+        }
     }
 }

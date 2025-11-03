@@ -1,39 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="MENU">
-        <menu>
-            <item android:title="Buscador por mapa"
-                app:showAsAction="always"
-                android:icon="@drawable/ic_baseline_map_24"
-                android:orderInCategory="0"
-                />
-            <item android:title="Buscador por distritos"
-                app:showAsAction="always"
-                android:icon="@drawable/ic_baseline_zoom_in_map_24"
-                android:orderInCategory="1"
-                />
-            <item android:title="Adjuntar negocio nuevo"
-                app:showAsAction="always"
-                android:icon="@drawable/ic_baseline_person_add_24"
-                android:orderInCategory="2"
-                />
-            <item android:title="Ayuda sobre la App"
-                app:showAsAction="always"
-                android:icon="@drawable/ic_baseline_help_24"
-                android:orderInCategory="3"
-                />
-            <item android:title="Compartir"
-                app:showAsAction="always"
-                android:icon="@drawable/ic_baseline_share_24"
-                android:orderInCategory="4"
-                />
-            <item android:title="Creditos"
-                app:showAsAction="always"
-                android:icon="@drawable/ic_baseline_account_circle_24"
-                android:orderInCategory="5"
-                />
-        </menu>
-    </item>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_maps"
+            android:icon="@drawable/ic_baseline_map_24"
+            android:title="@string/menu_maps"
+            android:orderInCategory="0" />
+
+        <item
+            android:id="@+id/nav_distritos"
+            android:icon="@drawable/ic_baseline_zoom_in_map_24"
+            android:title="@string/menu_districts"
+            android:orderInCategory="1" />
+
+        <item
+            android:id="@+id/nav_agregar_negocio"
+            android:icon="@drawable/ic_baseline_person_add_24"
+            android:title="@string/menu_add_business"
+            android:orderInCategory="2" />
+
+        <item
+            android:id="@+id/nav_ayuda"
+            android:icon="@drawable/ic_baseline_help_24"
+            android:title="@string/menu_help"
+            android:orderInCategory="3" />
+
+        <item
+            android:id="@+id/nav_compartir"
+            android:icon="@drawable/ic_baseline_share_24"
+            android:title="@string/menu_share"
+            android:orderInCategory="4" />
+
+        <item
+            android:id="@+id/nav_creditos"
+            android:icon="@drawable/ic_baseline_account_circle_24"
+            android:title="@string/menu_credits"
+            android:orderInCategory="5" />
+    </group>
+
 </menu>
