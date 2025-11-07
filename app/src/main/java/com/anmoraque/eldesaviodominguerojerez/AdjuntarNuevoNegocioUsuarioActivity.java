@@ -3,21 +3,32 @@ package com.anmoraque.eldesaviodominguerojerez;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar; // ⭐️ NUEVA IMPORTACIÓN
 import android.widget.Toast;
+
+import android.os.Handler;
+import android.os.Looper;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class AdjuntarNuevoNegocioUsuarioActivity extends AppCompatActivity implements View.OnFocusChangeListener {
 
-    // ⭐️ Nuevo: Código de solicitud para identificar el Intent de correo
-    private static final int EMAIL_REQUEST_CODE = 101;
+    // 🚨 TU URL DE GOOGLE APPS SCRIPT
+    private static final String SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxhceiQ4_4FTXpiPlwCvWtqpI8UxCdqLrb1pO3uRtaJs4XF7UERrInqRMIWFHoDyU7r/exec";
 
     private EditText editTextNombre, editTextNegocio, editTextDireccion, editTextTelefono, editTextEmail;
+    private ProgressBar progressBarLoading; // ⭐️ DECLARACIÓN DEL INDICADOR
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +52,9 @@ public class AdjuntarNuevoNegocioUsuarioActivity extends AppCompatActivity imple
         editTextTelefono = findViewById(R.id.editTextTelefono);
         editTextEmail = findViewById(R.id.editTextEmail);
 
+        // ⭐️ INICIALIZACIÓN DEL INDICADOR
+        progressBarLoading = findViewById(R.id.progressBarLoading);
+
         // Listeners
         editTextNombre.setOnFocusChangeListener(this);
         editTextNegocio.setOnFocusChangeListener(this);
@@ -49,26 +63,7 @@ public class AdjuntarNuevoNegocioUsuarioActivity extends AppCompatActivity imple
         editTextEmail.setOnFocusChangeListener(this);
     }
 
-    // ⭐️ Nuevo método: Se llama cuando una actividad iniciada con startActivityForResult termina
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        // Verifica que la respuesta provenga de nuestro Intent de correo
-        if (requestCode == EMAIL_REQUEST_CODE) {
-            // No importa realmente el resultCode para un Intent de correo (siempre es RESULT_CANCELED)
-            // Lo importante es que la aplicación de correo se ha abierto y el usuario regresa.
-
-            // ⭐️ Reiniciar la actividad para limpiar el formulario
-            Intent reinicioIntent = getIntent();
-            finish();
-            startActivity(reinicioIntent);
-
-            // Opcional: Mostrar el Toast de "Enviado" aquí si quieres que aparezca al volver
-            Toast.makeText(this, R.string.toast_form_sent, Toast.LENGTH_SHORT).show();
-        }
-    }
-
+    // ⭐️ ELIMINADO: onActivityResult (ya no se usa)
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -132,7 +127,8 @@ public class AdjuntarNuevoNegocioUsuarioActivity extends AppCompatActivity imple
     }
 
     /**
-     * Lanza un Intent de correo usando startActivityForResult.
+     * Reemplazo del Intent de correo.
+     * Ahora recopila los datos, muestra el indicador y llama a sendData.
      */
     public void mostrarDatosAdjuntarNegocioNuevo(View view) {
         if (!esFormularioValido()) {
@@ -140,34 +136,95 @@ public class AdjuntarNuevoNegocioUsuarioActivity extends AppCompatActivity imple
             return;
         }
 
-        // Construcción del cuerpo del mensaje
-        String enviar_mensaje = "--- Datos del Nuevo Negocio ---\n\n"
-                + "Nombre del solicitante: " + editTextNombre.getText().toString() + "\n"
-                + "Nombre del negocio: " + editTextNegocio.getText().toString() + "\n"
-                + "Dirección: " + editTextDireccion.getText().toString() + "\n"
-                + "Teléfono: " + editTextTelefono.getText().toString() + "\n"
-                + "Email de contacto: " + editTextEmail.getText().toString() + "\n\n"
-                + "--------------------------------";
+        // ⭐️ CONTROL DE UI INICIO: Mostrar barra de progreso y deshabilitar botón
+        progressBarLoading.setVisibility(View.VISIBLE);
+        view.setEnabled(false); // Deshabilita el botón de enviar
 
-        // Obtener Asunto y Correo de Destino
-        String enviar_asunto = getString(R.string.email_subject_new_business);
-        String enviar_correo = getString(R.string.email_destination_new_business);
+        // 1. Recopilar datos
+        final String nombre = editTextNombre.getText().toString();
+        final String negocio = editTextNegocio.getText().toString();
+        final String direccion = editTextDireccion.getText().toString();
+        final String telefono = editTextTelefono.getText().toString();
+        final String email = editTextEmail.getText().toString();
 
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{enviar_correo});
-        intent.putExtra(Intent.EXTRA_SUBJECT, enviar_asunto);
-        intent.putExtra(Intent.EXTRA_TEXT, enviar_mensaje);
+        // 2. Ejecutar la tarea de envío en un hilo de fondo (ExecutorService)
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        Handler handler = new Handler(Looper.getMainLooper());
 
+        executor.execute(() -> {
+            // Tarea en segundo plano
+            boolean success = sendData(nombre, negocio, direccion, telefono, email);
+
+            // Volver al hilo principal para actualizar la UI (Mostrar Toast y ocultar ProgressBar)
+            handler.post(() -> {
+
+                // ⭐️ CONTROL DE UI FIN: Ocultar barra de progreso y rehabilitar botón
+                progressBarLoading.setVisibility(View.GONE);
+                view.setEnabled(true);
+
+                if (success) {
+                    Toast.makeText(AdjuntarNuevoNegocioUsuarioActivity.this, R.string.toast_form_sent, Toast.LENGTH_SHORT).show();
+
+                    // Reiniciar la actividad para limpiar el formulario
+                    Intent reinicioIntent = getIntent();
+                    finish();
+                    startActivity(reinicioIntent);
+
+                } else {
+                    Toast.makeText(AdjuntarNuevoNegocioUsuarioActivity.this, R.string.toast_error_network, Toast.LENGTH_LONG).show();
+                }
+            });
+        });
+    }
+
+    /**
+     * Realiza la conexión HTTP y el envío de datos al Google Apps Script.
+     * @return true si la conexión fue exitosa (HTTP 200), false en caso contrario.
+     */
+    private boolean sendData(String nombre, String negocio, String direccion, String telefono, String email) {
+        HttpURLConnection urlConnection = null;
         try {
-            // ⭐️ CAMBIO CLAVE: Lanzamos el Intent esperando un resultado
-            startActivityForResult(Intent.createChooser(intent, getString(R.string.chooser_title_email)), EMAIL_REQUEST_CODE);
+            URL url = new URL(SCRIPT_URL);
+            urlConnection = (HttpURLConnection) url.openConnection();
 
-            // Eliminamos el Toast y el reinicio de aquí. Se mueven a onActivityResult.
+            // 1. Configurar la conexión para una petición POST
+            urlConnection.setRequestMethod("POST");
+            urlConnection.setDoOutput(true); // Indica que vamos a enviar datos
+            urlConnection.setDoInput(true);
+            urlConnection.setInstanceFollowRedirects(true);
+            urlConnection.setReadTimeout(15000);
+            urlConnection.setConnectTimeout(15000);
 
-        } catch (android.content.ActivityNotFoundException ex) {
-            // Manejamos el error si no hay app de correo configurada
-            Toast.makeText(this, "No se encontró una aplicación de correo configurada. Por favor, configura una app de correo.", Toast.LENGTH_LONG).show();
+            // 2. Construir la cadena de datos a enviar
+            String postData = "nombre=" + URLEncoder.encode(nombre, "UTF-8")
+                    + "&negocio=" + URLEncoder.encode(negocio, "UTF-8")
+                    + "&direccion=" + URLEncoder.encode(direccion, "UTF-8")
+                    + "&telefono=" + URLEncoder.encode(telefono, "UTF-8")
+                    + "&email=" + URLEncoder.encode(email, "UTF-8");
+
+            // 3. Enviar los datos
+            try (OutputStream os = urlConnection.getOutputStream()) {
+                byte[] input = postData.getBytes(StandardCharsets.UTF_8);
+                os.write(input, 0, input.length);
+            }
+
+            // 4. Leer la respuesta del script
+            int responseCode = urlConnection.getResponseCode();
+
+            // Si el código de respuesta es 200 (OK), el envío fue exitoso.
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            if (urlConnection != null) {
+                urlConnection.disconnect();
+            }
         }
     }
 }

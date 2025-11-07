@@ -78,4 +78,5 @@
     <string name="logo_app">Desavio Dominguero App-Logo</string>
     <string name="descripcion_imagen_distrito">Repräsentatives Bild des Bezirks</string>
     <string name="descripcion_imagen_negocio">Repräsentatives Bild des Geschäfts</string>
+    <string name="toast_error_network">Netzwerk- oder Verbindungsfehler. Bitte versuchen Sie es erneut.</string>
 </resources>
